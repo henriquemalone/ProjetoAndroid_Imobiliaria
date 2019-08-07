@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1064804935524",
+    "firebase_url": "https://imobiliarialaranjais-si700.firebaseio.com",
+    "project_id": "imobiliarialaranjais-si700",
+    "storage_bucket": "imobiliarialaranjais-si700.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064804935524:android:51cf378f2c3cc53e",
+        "android_client_info": {
+          "package_name": "com.example.si700_imobiliaria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1064804935524-mclubqpkgc67rgamvla7b2saek6h0k15.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfeSN1JkpqAh78IoBfibK7Y6K750DonyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1064804935524-mclubqpkgc67rgamvla7b2saek6h0k15.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
