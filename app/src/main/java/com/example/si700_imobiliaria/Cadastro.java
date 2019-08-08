@@ -13,6 +13,8 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,11 +40,17 @@ public class Cadastro extends AppCompatActivity {
     private EditText edtSenha;
     private EditText edtSenhaConfirm;
 
+    private FirebaseAuth firebaseauth;
+    private DatabaseReference firebasereference = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference usuarioReferencia = firebasereference.child("usuarios");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Cadastro");
         setContentView(R.layout.activity_cadastro);
+
+        firebaseauth = FirebaseAuth.getInstance();
 
         edtNome = findViewById(R.id.edtNome);
         edtTel = findViewById(R.id.edtTel);
@@ -54,7 +62,7 @@ public class Cadastro extends AppCompatActivity {
         rbCliente = findViewById(R.id.rbCliente);
         rbProprietario = findViewById(R.id.rbProprietario);
 
-
+        //Botão cancelar - Volta para a tela de login sem efetivar o cadastro do user
         btnCancelar = findViewById(R.id.btnCancelar);
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,23 +71,52 @@ public class Cadastro extends AppCompatActivity {
             }
         });
 
-
+        //Botão cadastrar - Faz o cadastro do user no firebase
         btnCadastrar = findViewById(R.id.btnCadastrar);
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                createUser(); //cadastra usuário
+                saveData(); //salva dados
+                Toast.makeText(getApplicationContext(),"Usuário criado com sucesso",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Cadastro.this, MainActivity.class)); //retorna para tela de login
             }
         });
     }
 
-    public boolean checkTipo(){
-        /*if(rbProprietario.isSelected() == false && rbCliente.isSelected() == false){
-            return false;
-        } else {
-            return true;
-        }*/
-        return true;
+    //Criar usuário/senha
+    public void createUser(){
+        firebaseauth.createUserWithEmailAndPassword(edtEmail.getText().toString(), edtSenha.getText().toString()).
+                addOnCompleteListener(Cadastro.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){ //se usuario criado com sucesso
+                    Log.i("createUser", "Usuário criado com sucesso");
+                    //Toast.makeText(getApplicationContext(),"Usuário criado com sucesso",Toast.LENGTH_SHORT).show();
+                } else{ //se der erro no cadastro
+                    Log.i("createUser", "ERRO");
+                    Toast.makeText(getApplicationContext(),"Erro. Usuário inválido",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    //Salvar dados do usuário
+    public void saveData(){
+        Usuario usuario = new Usuario();
+
+        usuario.setNome(edtNome.getText().toString());
+        usuario.setTelefone(edtTel.getText().toString());
+        usuario.setCelular(edtCel.getText().toString());
+        usuario.setEmail(edtEmail.getText().toString());
+        usuario.setSenha(edtSenha.getText().toString());
+        if(rbCliente.isSelected()){
+            usuario.setTipo("Cliente");
+        } else{
+            usuario.setTipo("Proprietário");
+        }
+
+        usuarioReferencia.push().setValue(usuario);
     }
 
     @Override
@@ -111,4 +148,7 @@ public class Cadastro extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
 }
+
+

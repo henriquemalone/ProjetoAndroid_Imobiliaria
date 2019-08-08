@@ -49,7 +49,8 @@
             android:hint="Senha"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp" />
+            android:paddingBottom="10dp"
+            android:inputType="textPassword"/>
         
         <GridLayout
             android:layout_width="match_parent"
