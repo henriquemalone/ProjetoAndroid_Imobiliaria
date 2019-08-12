@@ -32,6 +32,8 @@ public class Cadastro extends AppCompatActivity {
     private Button btnCadastrar;
     private RadioButton rbCliente;
     private RadioButton rbProprietario;
+    private RadioButton rbFeminino;
+    private RadioButton rbMasculino;
     private EditText edtNome;
     private EditText edtTel;
     private EditText edtCel;
@@ -61,6 +63,8 @@ public class Cadastro extends AppCompatActivity {
         edtSenhaConfirm = findViewById(R.id.edtSenhaConfirm);
         rbCliente = findViewById(R.id.rbCliente);
         rbProprietario = findViewById(R.id.rbProprietario);
+        rbFeminino = findViewById(R.id.rbFeminino);
+        rbMasculino = findViewById(R.id.rbMasculino);
 
         //Botão cancelar - Volta para a tela de login sem efetivar o cadastro do user
         btnCancelar = findViewById(R.id.btnCancelar);
@@ -92,7 +96,7 @@ public class Cadastro extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){ //se usuario criado com sucesso
                     Log.i("createUser", "Usuário criado com sucesso");
-                    //Toast.makeText(getApplicationContext(),"Usuário criado com sucesso",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Usuário criado com sucesso",Toast.LENGTH_LONG).show();
                 } else{ //se der erro no cadastro
                     Log.i("createUser", "ERRO");
                     Toast.makeText(getApplicationContext(),"Erro. Usuário inválido",Toast.LENGTH_SHORT).show();
@@ -110,10 +114,18 @@ public class Cadastro extends AppCompatActivity {
         usuario.setCelular(edtCel.getText().toString());
         usuario.setEmail(edtEmail.getText().toString());
         usuario.setSenha(edtSenha.getText().toString());
-        if(rbCliente.isSelected()){
+
+        //Verifica se o usuário é Cliente ou proprietário
+        if(rbCliente.isChecked()){
             usuario.setTipo("Cliente");
         } else{
             usuario.setTipo("Proprietário");
+        }
+        //Verifica se o usuário é Homem ou Mulher
+        if(rbFeminino.isChecked()){
+            usuario.setSexo("Feminino");
+        } else{
+            usuario.setSexo("Masculino");
         }
 
         usuarioReferencia.push().setValue(usuario);

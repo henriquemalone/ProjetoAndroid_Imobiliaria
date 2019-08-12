@@ -11,6 +11,8 @@ public class Usuario {
     private String email;
     private String usuario;
     private String senha;
+    private  String sexo;
+    private String id;
 
     public Usuario(){
 
@@ -70,5 +72,21 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
