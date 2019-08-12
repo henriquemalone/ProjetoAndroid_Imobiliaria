@@ -12,6 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:text="Você é:"/>
 
     <RadioGroup
@@ -37,18 +38,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:textColor="@color/black"
         android:text="Nome:"/>
 
     <EditText
         android:id="@+id/edtNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white" />
+        android:background="@drawable/arredondamento"
+        android:textCursorDrawable="@color/cursor"
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:textColor="@color/black"
         android:text="Sexo:"/>
 
     <RadioGroup
@@ -83,6 +88,7 @@
             android:layout_marginTop="15dp"
             android:layout_column="0"
             android:layout_row="0"
+            android:textColor="@color/black"
             android:text="Telefone:"/>
 
         <EditText
@@ -91,8 +97,9 @@
             android:layout_height="wrap_content"
             android:layout_row="1"
             android:layout_column="0"
-            android:background="@color/white"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:background="@drawable/arredondamento"
+            android:textCursorDrawable="@color/cursor"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -101,17 +108,19 @@
             android:layout_column="1"
             android:layout_row="0"
             android:layout_marginLeft="15dp"
+            android:textColor="@color/black"
             android:text="Celular:"/>
 
         <EditText
             android:id="@+id/edtCel"
-            android:layout_width="match_parent"
+            android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:layout_row="1"
             android:layout_column="1"
-            android:background="@color/white"
             android:layout_marginLeft="15dp"
-            android:inputType="phone" />
+            android:background="@drawable/arredondamento"
+            android:inputType="phone"
+            android:textCursorDrawable="@color/cursor" />
 
     </GridLayout>
 
@@ -119,53 +128,60 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:textColor="@color/black"
         android:text="E-mail:"/>
 
     <EditText
         android:id="@+id/edtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:inputType="textEmailAddress"/>
+        android:inputType="textEmailAddress"
+        android:background="@drawable/arredondamento"
+        android:textCursorDrawable="@color/cursor"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:textColor="@color/black"
         android:text="Confirme o e-mail:"/>
 
     <EditText
         android:id="@+id/edtEmailConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:inputType="textEmailAddress"/>
+        android:inputType="textEmailAddress"
+        android:background="@drawable/arredondamento"
+        android:textCursorDrawable="@color/cursor"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:textColor="@color/black"
         android:text="Senha:"/>
 
     <EditText
         android:id="@+id/edtSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:background="@drawable/arredondamento"
+        android:textCursorDrawable="@color/cursor"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:textColor="@color/black"
         android:text="Confirme sua senha:"/>
 
     <EditText
         android:id="@+id/edtSenhaConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:background="@drawable/arredondamento"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -178,17 +194,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/white"
-            android:text="Cadastrar" />
+            android:padding="10dp"
+            android:text="Cadastrar"
+            android:background="@drawable/arredondamento"/>
 
         <Button
             android:id="@+id/btnCancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/white"
             android:layout_marginLeft="10dp"
-            android:text="Cancelar" />
+            android:text="Cancelar"
+            android:background="@drawable/arredondamento"/>
 
     </LinearLayout>
 

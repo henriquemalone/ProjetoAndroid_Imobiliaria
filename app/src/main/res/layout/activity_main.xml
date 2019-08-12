@@ -39,7 +39,8 @@
             android:hint="Usuário"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp" />
+            android:paddingBottom="10dp"
+            android:textCursorDrawable="@color/cursor"/>
 
         <EditText
             android:id="@+id/password"
@@ -50,7 +51,8 @@
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:textCursorDrawable="@color/cursor"/>
         
         <GridLayout
             android:layout_width="match_parent"
@@ -72,7 +74,7 @@
                 android:layout_column="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@drawable/arredondamento"
                 android:text="Login" />
         </GridLayout>
 
