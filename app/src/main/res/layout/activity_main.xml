@@ -40,7 +40,7 @@
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:textCursorDrawable="@color/cursor"/>
+            android:textCursorDrawable="@color/black"/>
 
         <EditText
             android:id="@+id/password"
@@ -52,7 +52,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:inputType="textPassword"
-            android:textCursorDrawable="@color/cursor"/>
+            android:textCursorDrawable="@color/black"/>
         
         <GridLayout
             android:layout_width="match_parent"

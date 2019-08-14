@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/arredondamento"
-        android:textCursorDrawable="@color/cursor"
+        android:textCursorDrawable="@color/black"
         />
 
     <TextView
@@ -99,7 +99,7 @@
             android:layout_column="0"
             android:inputType="phone"
             android:background="@drawable/arredondamento"
-            android:textCursorDrawable="@color/cursor"/>
+            android:textCursorDrawable="@color/black"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -120,7 +120,7 @@
             android:layout_marginLeft="15dp"
             android:background="@drawable/arredondamento"
             android:inputType="phone"
-            android:textCursorDrawable="@color/cursor" />
+            android:textCursorDrawable="@color/black" />
 
     </GridLayout>
 
@@ -137,7 +137,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:background="@drawable/arredondamento"
-        android:textCursorDrawable="@color/cursor"/>
+        android:textCursorDrawable="@color/black"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -152,7 +152,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:background="@drawable/arredondamento"
-        android:textCursorDrawable="@color/cursor"/>
+        android:textCursorDrawable="@color/black"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -167,7 +167,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:background="@drawable/arredondamento"
-        android:textCursorDrawable="@color/cursor"/>
+        android:textCursorDrawable="@color/black"/>
 
     <TextView
         android:layout_width="wrap_content"
