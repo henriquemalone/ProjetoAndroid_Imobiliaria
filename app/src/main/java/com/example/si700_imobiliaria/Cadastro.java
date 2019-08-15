@@ -80,10 +80,16 @@ public class Cadastro extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createUser(); //cadastra usuário
-                saveData(); //salva dados
-                Toast.makeText(getApplicationContext(),"Usuário criado com sucesso",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(Cadastro.this, MainActivity.class)); //retorna para tela de login
+                if(checkFields() == 0){ //Verifica se todos os campos foram preenchidos
+                    if(saveData() == true){ //se todos os campos foram preenchidos e foram salvos no banco de dados corretamente
+                        Toast.makeText(getApplicationContext(),"Usuário criado com sucesso",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(Cadastro.this, MainActivity.class)); //retorna para tela de login
+                    } else{
+                        Toast.makeText(getApplicationContext(),"E-mail e/ou senha não coincidem",Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(),"Há campos não preenchidos",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -99,14 +105,14 @@ public class Cadastro extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Usuário criado com sucesso",Toast.LENGTH_LONG).show();
                 } else{ //se der erro no cadastro
                     Log.i("createUser", "ERRO");
-                    Toast.makeText(getApplicationContext(),"Erro. Usuário inválido",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Erro. Usuário inválido",Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
     //Salvar dados do usuário
-    public void saveData(){
+    public boolean saveData(){
         Usuario usuario = new Usuario();
 
         usuario.setNome(edtNome.getText().toString());
@@ -128,7 +134,57 @@ public class Cadastro extends AppCompatActivity {
             usuario.setSexo("Masculino");
         }
 
-        usuarioReferencia.push().setValue(usuario);
+        //Se os campos Email e Senha forem preenchidos corretamente
+        if(checkEmail() == true && checkPassword() == true){
+            usuarioReferencia.push().setValue(usuario); //salva dados no banco de dados firebase
+            createUser(); //metodo para criar usuário
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    //Verifica se o campo email e confirmar email estão iguais
+    public boolean checkEmail(){
+        if(edtEmail.getText().toString().equals(edtEmailConfirm.getText().toString())){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //Verifica se o campo senha e confirmar senha estão iguais
+    public boolean checkPassword(){
+        if(edtSenha.getText().toString().equals(edtSenhaConfirm.getText().toString())){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //Verifica se todos os campos foram preenchdios. Caso não, a variável aux sera incrementado +1
+    public int checkFields(){
+        int aux = 0;
+
+        //Checa se o radio button foi selecionado
+        if(rbCliente.isChecked() == false && rbProprietario.isChecked() == false){
+            aux++;
+        }
+
+        //Checa se o radio button foi selecionado
+        if(rbMasculino.isChecked() == false && rbFeminino.isChecked() == false){
+            aux++;
+        }
+
+        //Checa se os campos foram preenchidos
+        if(edtNome.getText().toString().equals("") || edtTel.getText().toString().equals("") ||
+                edtCel.getText().toString().equals("") || edtEmail.getText().toString().equals("") ||
+                edtEmailConfirm.getText().toString().equals("") || edtSenha.getText().toString().equals("") ||
+                edtSenhaConfirm.getText().toString().equals("")){
+            aux++;
+        }
+
+        return aux;
     }
 
     @Override
