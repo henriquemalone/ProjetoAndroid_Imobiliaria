@@ -58,18 +58,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //Autenticar usuário
+    //Realizar login
     public void login(){
         firebaseauth.signInWithEmailAndPassword(usuario.getText().toString(), senha.getText().toString()).
                 addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){ //login efetuado
+                    startActivity(new Intent(MainActivity.this, Perfil.class));
                     Log.i("signIn", "Login realizado com sucesso");
-                    Toast.makeText(getApplicationContext(),"Login realizado com sucesso",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"Login realizado com sucesso",Toast.LENGTH_SHORT).show();
                 } else{ //erro ao efetuar o login
                     Log.i("signIn", "ERRO");
-                    Toast.makeText(getApplicationContext(),"ERRO ao logar",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"E-mail e/ou senha incorretos",Toast.LENGTH_SHORT).show();
                 }
             }
         });

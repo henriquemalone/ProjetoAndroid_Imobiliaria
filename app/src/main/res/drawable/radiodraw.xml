@@ -19,7 +19,7 @@
             </item>
             <item android:top="5dp" android:bottom="5dp" android:left="5dp" android:right="5dp">
                 <shape android:shape="oval">
-                    <solid android:width="1dp" android:color="#008577"/>
+                    <solid android:width="1dp" android:color="@color/orange"/>
                     <size android:width="10dp" android:height="10dp"/>
                 </shape>
             </item>
