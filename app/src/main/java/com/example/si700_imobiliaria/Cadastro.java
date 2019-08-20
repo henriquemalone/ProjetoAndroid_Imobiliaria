@@ -84,16 +84,11 @@ public class Cadastro extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(checkFields() == 0){ //Verifica se todos os campos foram preenchidos
-                    createUser();
-                    if(saveData() == true){ //se todos os campos foram preenchidos e foram salvos no banco de dados corretamente
-                        Toast.makeText(getApplicationContext(),"Usuário criado com sucesso",Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(Cadastro.this, MainActivity.class)); //retorna para tela de login
-                    } else{
-                        Toast.makeText(getApplicationContext(),"E-mail e/ou senha não coincidem",Toast.LENGTH_LONG).show();
-                    }
+                    createUser(); //chama o método que cria o usuário/senha
                 } else {
                     Toast.makeText(getApplicationContext(),"Há campos não preenchidos",Toast.LENGTH_LONG).show();
                 }
+                firebaseauth.signOut();
             }
         });
     }
@@ -105,28 +100,30 @@ public class Cadastro extends AppCompatActivity {
 
         firebaseauth = FirebaseAuth.getInstance();
 
-        firebaseauth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Se criado com sucesso
-                            Toast.makeText(getApplicationContext(),"Usuário criado com sucesso",Toast.LENGTH_LONG).show();
-                            Log.d("createUser", "createUserWithEmail:success");
-                        } else {
-                            // Se der erro, exibirá a mensagem
-                            Log.w("createUser", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(Cadastro.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+        if(checkEmail() == true && checkPassword() == true) {
+            firebaseauth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("createUser", "createUserWithEmail:success");
+                                FirebaseUser user = firebaseauth.getCurrentUser();
+                                saveData(user.getUid()); //chama o método que salva os dados do usuário passando o UID como parametro
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w("createUser", "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(Cadastro.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            }
                         }
-
-                    }
-                });
+                    });
+        } else{
+            Toast.makeText(getApplicationContext(),"E-mail e/ou senha não coincidem",Toast.LENGTH_SHORT).show();
+        }
     }
 
     //Salvar dados do usuário
-    public boolean saveData(){
+    public void saveData(String uid){
         Usuario usuario = new Usuario();
 
         usuario.setNome(edtNome.getText().toString());
@@ -149,16 +146,13 @@ public class Cadastro extends AppCompatActivity {
         }
 
         //Se os campos Email e Senha forem preenchidos corretamente
-        if(checkEmail() == true && checkPassword() == true){
-            try{
-                usuarioReferencia.push().setValue(usuario); //salva dados no banco de dados firebase
-                return true;
-            } catch(Exception e){
-                Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
-                return false;
-            }
-        } else{
-            return false;
+        try{
+            usuarioReferencia.child(uid).setValue(usuario); //salva dados no banco de dados firebase e usa o UID como ID
+            Toast.makeText(getApplicationContext(),"Usuário criado com sucesso",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(Cadastro.this, MainActivity.class)); //retorna para tela de login
+        } catch(Exception e){
+            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"E-mail e/ou senha não coincidem",Toast.LENGTH_SHORT).show();
         }
     }
 
