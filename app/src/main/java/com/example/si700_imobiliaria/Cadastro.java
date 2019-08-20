@@ -100,8 +100,8 @@ public class Cadastro extends AppCompatActivity {
 
         firebaseauth = FirebaseAuth.getInstance();
 
-        if(checkEmail() == true && checkPassword() == true) {
-            firebaseauth.createUserWithEmailAndPassword(email, password)
+        if(checkEmail() == true && checkPassword() == true) { //se email e senha coincidirem
+            firebaseauth.createUserWithEmailAndPassword(email, password) //cria usuário/senha
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
