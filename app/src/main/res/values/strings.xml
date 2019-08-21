@@ -8,10 +8,10 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_perfil">Perfil</string>
+    <string name="menu_anunciar">Anunciar</string>
+    <string name="menu_alugar">Alugar</string>
+    <string name="menu_comprar">Comprar</string>
+    <string name="menu_sair">Sair</string>
+    <string name="menu_feedback">Feedback</string>
 </resources>
