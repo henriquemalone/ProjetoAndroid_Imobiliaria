@@ -6,6 +6,7 @@ public class Usuario {
 
     private String tipo;
     private String nome;
+    private String sobrenome;
     private String telefone;
     private String celular;
     private String email;
@@ -88,5 +89,13 @@ public class Usuario {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 }

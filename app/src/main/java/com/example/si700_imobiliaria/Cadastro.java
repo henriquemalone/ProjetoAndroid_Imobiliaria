@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +38,7 @@ public class Cadastro extends AppCompatActivity {
     private RadioButton rbFeminino;
     private RadioButton rbMasculino;
     private EditText edtNome;
+    private EditText edtSobrenome;
     private EditText edtTel;
     private EditText edtCel;
     private EditText edtEmail;
@@ -58,6 +60,7 @@ public class Cadastro extends AppCompatActivity {
         firebaseauth = FirebaseAuth.getInstance();
 
         edtNome = findViewById(R.id.edtNome);
+        edtSobrenome = findViewById(R.id.edtSobrenome);
         edtTel = findViewById(R.id.edtTel);
         edtCel = findViewById(R.id.edtCel);
         edtEmail = findViewById(R.id.edtEmail);
@@ -112,8 +115,12 @@ public class Cadastro extends AppCompatActivity {
                                 saveData(user.getUid()); //chama o método que salva os dados do usuário passando o UID como parametro
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Log.w("createUser", "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(Cadastro.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                if (task.getException() instanceof FirebaseAuthUserCollisionException) { //Verifica se o e-mail já esta cadastrado
+                                    Toast.makeText(Cadastro.this, "E-mail já cadastrado", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Log.w("createUser", "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(Cadastro.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
                     });
@@ -127,6 +134,7 @@ public class Cadastro extends AppCompatActivity {
         Usuario usuario = new Usuario();
 
         usuario.setNome(edtNome.getText().toString());
+        usuario.setSobrenome(edtSobrenome.getText().toString());
         usuario.setTelefone(edtTel.getText().toString());
         usuario.setCelular(edtCel.getText().toString());
         usuario.setEmail(edtEmail.getText().toString());
