@@ -12,12 +12,13 @@
     tools:showIn="@layout/app_bar_perfil">
 
     <ImageView
+        android:id="@+id/imgFoto"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:src="@drawable/googleg_standard_color_18"/>
+        android:src="@drawable/ic_photo_512"/>
 
     <TextView
         android:id="@+id/textNome"
