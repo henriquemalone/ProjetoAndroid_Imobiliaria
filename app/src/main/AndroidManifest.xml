@@ -13,7 +13,7 @@
         <activity
             android:name=".Perfil"
             android:label="@string/title_activity_perfil"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Cadastro" />
         <activity android:name=".MainActivity">
             <intent-filter>
