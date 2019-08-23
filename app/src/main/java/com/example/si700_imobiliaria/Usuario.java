@@ -14,6 +14,7 @@ public class Usuario {
     private String senha;
     private  String sexo;
     private String id;
+    private String foto;
 
     public Usuario(){
 
@@ -97,5 +98,13 @@ public class Usuario {
 
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }

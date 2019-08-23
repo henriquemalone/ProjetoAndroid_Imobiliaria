@@ -10,12 +10,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 
@@ -36,6 +40,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.internal.InternalTokenProvider;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -46,15 +53,20 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Perfil extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -69,10 +81,19 @@ public class Perfil extends AppCompatActivity
     private EditText edtEmail;
     private Button btnSalvar;
 
-    private ImageView imgFoto;
+    private CircleImageView imgFoto;
     private final int GALERIA_IMAGENS = 1;
     private final int PERMISSAO_REQUEST = 2;
 
+    private ProgressBar mProgressBar;
+
+    private final static int mWidth = 512;
+    private final static int mHeight = 512;
+
+    private ArrayList<String> pathArray;
+    private int array_position;
+
+    private StorageReference mStorageRef;
     private FirebaseAuth firebaseauth;
     private DatabaseReference firebasereference = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference usuarioReferencia = firebasereference.child("usuarios");
@@ -96,12 +117,12 @@ public class Perfil extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+        /*if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSAO_REQUEST);
             }
-        }
+        }*/
 
         nomeSobr = findViewById(R.id.textNome);
         rbCliente = findViewById(R.id.rbCliente);
@@ -113,8 +134,11 @@ public class Perfil extends AppCompatActivity
         edtEmail = findViewById(R.id.edtEmail);
         btnSalvar = findViewById(R.id.btnSalvar);
         imgFoto = findViewById(R.id.imgFoto);
+        pathArray = new ArrayList<>();
+        mProgressBar = new ProgressBar(Perfil.this);
 
-        //firebaseauth = FirebaseAuth.getInstance();
+        firebaseauth = FirebaseAuth.getInstance();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 
         loadData(); //carrega dados do usuário
 
@@ -314,6 +338,7 @@ public class Perfil extends AppCompatActivity
 
         try{
             usuarioReferencia.child(user.getUid()).setValue(usuario); //salva dados no banco de dados firebase e usa o UID como ID
+            savePhoto();
 
             return true;
         } catch(Exception e){
@@ -321,6 +346,29 @@ public class Perfil extends AppCompatActivity
 
             return false;
         }
+    }
+
+    public void savePhoto(){
+        firebaseauth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseauth.getCurrentUser();
+        Usuario usuario = new Usuario();
+
+        /*Uri uri = Uri.fromFile(new File( MediaStore.Images.Media.DATA ));
+        StorageReference storagereference = mStorageRef.child("FotosPerfil/" + user.getUid() + ".jpg");
+        storagereference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.i("uploadPhoto", "Ok");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i("uploadPhoto", "Erro coma  foto");
+            }
+        });*/
+
+        // we finally have our base64 string version of the image, save it.
+        usuarioReferencia.child(user.getUid()).setValue(usuario.getFoto());
     }
 
     @Override
@@ -350,8 +398,6 @@ public class Perfil extends AppCompatActivity
             imgFoto.setImageBitmap(imagemGaleria);
         }
     }
-
-
 
     @Override
     protected void onStart() {
