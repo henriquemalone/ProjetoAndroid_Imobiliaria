@@ -1,6 +1,7 @@
 package com.example.si700_imobiliaria;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
@@ -85,13 +86,7 @@ public class Perfil extends AppCompatActivity
     private final int GALERIA_IMAGENS = 1;
     private final int PERMISSAO_REQUEST = 2;
 
-    private ProgressBar mProgressBar;
-
-    private final static int mWidth = 512;
-    private final static int mHeight = 512;
-
     private ArrayList<String> pathArray;
-    private int array_position;
 
     private StorageReference mStorageRef;
     private FirebaseAuth firebaseauth;
@@ -117,12 +112,18 @@ public class Perfil extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        /*if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+
+        //Solicita permissao para acessar Galeria de imagens
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                Toast.makeText(getApplicationContext(),"Permissão de acesso negada pelo usuário",Toast.LENGTH_LONG).show();
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSAO_REQUEST);
+
             }
-        }*/
+        }
+
+        loadData(); //carrega dados do usuário
 
         nomeSobr = findViewById(R.id.textNome);
         rbCliente = findViewById(R.id.rbCliente);
@@ -135,12 +136,9 @@ public class Perfil extends AppCompatActivity
         btnSalvar = findViewById(R.id.btnSalvar);
         imgFoto = findViewById(R.id.imgFoto);
         pathArray = new ArrayList<>();
-        mProgressBar = new ProgressBar(Perfil.this);
 
         firebaseauth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
-
-        loadData(); //carrega dados do usuário
 
         imgFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +163,6 @@ public class Perfil extends AppCompatActivity
             }
         });
     }
-
 
     @Override
     public void onBackPressed() {
@@ -342,7 +339,7 @@ public class Perfil extends AppCompatActivity
 
             return true;
         } catch(Exception e){
-            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Erro ao atualizar o cadastro "+e.toString(),Toast.LENGTH_SHORT).show();
 
             return false;
         }
@@ -351,36 +348,24 @@ public class Perfil extends AppCompatActivity
     public void savePhoto(){
         firebaseauth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseauth.getCurrentUser();
-        Usuario usuario = new Usuario();
 
-        /*Uri uri = Uri.fromFile(new File( MediaStore.Images.Media.DATA ));
+        Log.i("uploadPhoto", pathArray.get(0));
+
+        Uri uri = Uri.fromFile(new File( pathArray.get(0)));
         StorageReference storagereference = mStorageRef.child("FotosPerfil/" + user.getUid() + ".jpg");
         storagereference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Log.i("uploadPhoto", "Ok");
+                pathArray.clear();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.i("uploadPhoto", "Erro coma  foto");
+                Log.i("uploadPhoto", "Erro com a foto");
+                pathArray.clear();
             }
-        });*/
-
-        // we finally have our base64 string version of the image, save it.
-        usuarioReferencia.child(user.getUid()).setValue(usuario.getFoto());
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grandResults){
-        if(requestCode == PERMISSAO_REQUEST){
-            if(grandResults.length > 0 && grandResults[0] == PackageManager.PERMISSION_GRANTED){
-
-            } else {
-
-            }
-            return;
-        }
+        });
     }
 
     @Override
@@ -395,7 +380,9 @@ public class Perfil extends AppCompatActivity
             String picturePath = c.getString(columnIndex);
             c.close();
             Bitmap imagemGaleria = (BitmapFactory.decodeFile(picturePath));
+            Log.i("PathFileImage", picturePath);
             imgFoto.setImageBitmap(imagemGaleria);
+            pathArray.add(picturePath);
         }
     }
 
