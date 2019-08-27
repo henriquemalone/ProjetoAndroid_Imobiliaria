@@ -32,7 +32,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:18.0.1'
     implementation 'com.google.firebase:firebase-auth:18.1.0'
     implementation 'com.google.firebase:firebase-storage:18.0.0'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.firebaseui:firebase-ui-storage:3.3.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -14,6 +14,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Registry;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -112,7 +117,6 @@ public class Perfil extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-
         //Solicita permissao para acessar Galeria de imagens
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
@@ -162,6 +166,17 @@ public class Perfil extends AppCompatActivity
                 }
             }
         });
+    }
+
+    @GlideModule
+    public class MyAppGlideModule extends AppGlideModule {
+
+        @Override
+        public void registerComponents(Context context, Glide glide, Registry registry) {
+            // Register FirebaseImageLoader to handle StorageReference
+            registry.append(StorageReference.class, InputStream.class,
+                    new FirebaseImageLoader.Factory());
+        }
     }
 
     @Override
@@ -227,7 +242,7 @@ public class Perfil extends AppCompatActivity
     }
 
     //Exibir nome do usuário no menu
-    public void setUserName(String nome){
+    public void setUserMenu(String nome, String email){
         // Obtém a referência do layout de navegação
         NavigationView navigationView = findViewById(R.id.nav_view);
 
@@ -237,19 +252,29 @@ public class Perfil extends AppCompatActivity
         // Obtém a referência do nome do usuário e altera seu nome
         TextView txtNomeUser = headerView.findViewById(R.id.nav_nome);
         txtNomeUser.setText("Olá, " +nome);
-    }
 
-    //Exibir email do usuário no menu
-    public void setUserEmail(String email){
-        // Obtém a referência do layout de navegação
-        NavigationView navigationView = findViewById(R.id.nav_view);
-
-        // Obtém a referência da view de cabeçalho
-        View headerView = navigationView.getHeaderView(0);
-
-        // Obtém a referência do nome do usuário e altera seu nome
         TextView txtEmailUser = headerView.findViewById(R.id.nav_email);
         txtEmailUser.setText(email);
+
+        final CircleImageView imgPhotoUser = headerView.findViewById(R.id.nav_PhotoUser);
+        firebaseauth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseauth.getCurrentUser();
+
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("FotosPerfil/"+user.getUid()+".jpg");
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(Perfil.this)
+                        .load(uri.toString())
+                        .into(imgPhotoUser);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                //Se falar, retorna a imagem de perfil padrão
+                imgPhotoUser.setImageResource(R.drawable.ic_photo_512);
+            }
+        });
     }
 
     //Verifica se os campos telefone e celular estão preenchidos
@@ -264,7 +289,7 @@ public class Perfil extends AppCompatActivity
     //Carrega dados do usuário no perfil
     public void loadData(){
         firebaseauth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseauth.getCurrentUser();
+        final FirebaseUser user = firebaseauth.getCurrentUser();
 
         usuarioReferencia.child(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -274,29 +299,32 @@ public class Perfil extends AppCompatActivity
                 email[0] = dataSnapshot.child("email").getValue().toString();
                 senha[0] = dataSnapshot.child("senha").getValue().toString();
 
-                nomeSobr.setText(dataSnapshot.child("nome").getValue().toString()+" "+dataSnapshot.child("sobrenome").getValue().toString());
+                nomeSobr.setText(dataSnapshot.child("nome").getValue().toString() + " " + dataSnapshot.child("sobrenome").getValue().toString());
                 edtTel.setText(dataSnapshot.child("telefone").getValue().toString());
                 edtCel.setText(dataSnapshot.child("celular").getValue().toString());
                 edtEmail.setText(dataSnapshot.child("email").getValue().toString());
 
-                if(dataSnapshot.child("tipo").getValue().toString().equals("Cliente")){
+                if (dataSnapshot.child("tipo").getValue().toString().equals("Cliente")) {
                     rbCliente.setChecked(true);
                     rbProprietario.setChecked(false);
-                } else{
+                } else {
                     rbProprietario.setChecked(true);
                     rbCliente.setChecked(false);
                 }
 
-                if(dataSnapshot.child("sexo").getValue().toString().equals("Feminino")){
+                if (dataSnapshot.child("sexo").getValue().toString().equals("Feminino")) {
                     rbFeminino.setChecked(true);
                     rbMasculino.setChecked(false);
-                } else{
+                } else {
                     rbFeminino.setChecked(false);
                     rbMasculino.setChecked(true);
                 }
 
-                setUserName(nome[0]);
-                setUserEmail(email[0]);
+                //Muda nome e email do usuário no menu
+                setUserMenu(nome[0], email[0]);
+
+                //Retorna foto de perfil
+                loadPhoto(imgFoto);
             }
 
             @Override
@@ -345,11 +373,37 @@ public class Perfil extends AppCompatActivity
         }
     }
 
-    public void savePhoto(){
+    //Carrega foto de perfil do Storage Firebase
+    public void loadPhoto(final ImageView photo){
         firebaseauth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseauth.getCurrentUser();
 
-        Log.i("uploadPhoto", pathArray.get(0));
+        try{
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("FotosPerfil/"+user.getUid()+".jpg");
+            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(Perfil.this)
+                            .load(uri.toString())
+                            .into(imgFoto);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    //Se falar, retorna a imagem de perfil padrão
+                    photo.setImageResource(R.drawable.ic_photo_512);
+                }
+            });
+        } catch (Exception e){
+            Log.i("ErroFoto", e.toString());
+            Toast.makeText(getApplicationContext(),"Erro "+e.toString(),Toast.LENGTH_LONG).show();
+        }
+    }
+
+    //Salva foto de perfil no Storage Firebase
+    public void savePhoto(){
+        firebaseauth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseauth.getCurrentUser();
 
         Uri uri = Uri.fromFile(new File( pathArray.get(0)));
         StorageReference storagereference = mStorageRef.child("FotosPerfil/" + user.getUid() + ".jpg");
@@ -368,6 +422,7 @@ public class Perfil extends AppCompatActivity
         });
     }
 
+    //Carrega imagem da galeria no perfil
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);

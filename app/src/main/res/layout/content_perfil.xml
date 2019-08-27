@@ -17,8 +17,7 @@
         android:layout_height="200dp"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/ic_photo_512"/>
+        android:layout_marginTop="50dp" />
 
     <TextView
         android:id="@+id/textNome"
