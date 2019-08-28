@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -45,6 +47,9 @@ public class Cadastro extends AppCompatActivity {
     private EditText edtEmailConfirm;
     private EditText edtSenha;
     private EditText edtSenhaConfirm;
+    private ProgressBar progressBar;
+
+    private int progressStatus = 0;
 
     private FirebaseAuth firebaseauth;
     private DatabaseReference firebasereference = FirebaseDatabase.getInstance().getReference();
@@ -71,6 +76,7 @@ public class Cadastro extends AppCompatActivity {
         rbProprietario = findViewById(R.id.rbProprietario);
         rbFeminino = findViewById(R.id.rbFeminino);
         rbMasculino = findViewById(R.id.rbMasculino);
+        progressBar = findViewById(R.id.progressBar);
 
         //Botão cancelar - Volta para a tela de login sem efetivar o cadastro do user
         btnCancelar = findViewById(R.id.btnCancelar);
@@ -87,13 +93,38 @@ public class Cadastro extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(checkFields() == 0){ //Verifica se todos os campos foram preenchidos
-                    createUser(); //chama o método que cria o usuário/senha
+                    update();
                 } else {
                     Toast.makeText(getApplicationContext(),"Há campos não preenchidos",Toast.LENGTH_LONG).show();
                 }
                 firebaseauth.signOut();
             }
         });
+    }
+
+    //Espera 3segs pra salvar as mudanças e atualizar as informações na activity
+    public void update(){
+        progressBar.setVisibility(View.VISIBLE);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                while (progressStatus < 100) {
+                    progressStatus += 1;
+                    // Update the progress bar and display the
+                    //current value in the text view
+                    handler.post(new Runnable() {
+                        public void run() {
+                            progressBar.setProgress(progressStatus);
+                            //textView.setText(progressStatus+"/"+progressBar.getMax());
+                        }
+                    });
+                }
+                createUser(); //chama o método que cria o usuário/senha
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        }, 3000);
+
     }
 
     //Criar usuário/senha

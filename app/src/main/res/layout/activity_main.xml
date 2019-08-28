@@ -8,76 +8,82 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
+        android:layout_gravity="center_horizontal"
         android:gravity="center">
 
-        <ImageView
-            android:layout_width="172dp"
-            android:layout_height="169dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/logo" />
-
-        <ImageView
-            android:layout_width="172dp"
-            android:layout_height="124dp"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="center"
-            android:src="@drawable/logo2" />
-
-        <EditText
-            android:id="@+id/user"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:hint="E-mail"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:textCursorDrawable="@color/black"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp">
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:hint="Senha"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:inputType="textPassword"
-            android:textCursorDrawable="@color/black"/>
-        
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="3"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
+            <ImageView
+                android:layout_width="172dp"
+                android:layout_height="169dp"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/logo" />
 
-            <TextView
-                android:id="@+id/cadastrar"
-                android:layout_column="0"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="172dp"
+                android:layout_height="124dp"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center"
+                android:src="@drawable/logo2" />
+
+            <EditText
+                android:id="@+id/user"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cadastrar"
-                android:textColor="#0000FF"/>
+                android:background="@color/white"
+                android:hint="E-mail"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textCursorDrawable="@color/black" />
 
-            <Button
-                android:id="@+id/login"
-                android:layout_column="2"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/arredondamento"
-                android:text="Login" />
-        </GridLayout>
+                android:background="@color/white"
+                android:hint="Senha"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textCursorDrawable="@color/black" />
 
-    </LinearLayout>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
 
+                <TextView
+                    android:id="@+id/cadastrar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:text="Cadastrar"
+                    android:textColor="#0000FF" />
+
+                <Button
+                    android:id="@+id/login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:background="@drawable/arredondamento"
+                    android:text="Login" />
+            </GridLayout>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

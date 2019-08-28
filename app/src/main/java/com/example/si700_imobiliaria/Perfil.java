@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -86,12 +87,14 @@ public class Perfil extends AppCompatActivity
     private EditText edtCel;
     private EditText edtEmail;
     private Button btnSalvar;
+    private ProgressBar progressBar;
 
     private CircleImageView imgFoto;
     private final int GALERIA_IMAGENS = 1;
     private final int PERMISSAO_REQUEST = 2;
 
     private ArrayList<String> pathArray;
+    private int progressStatus = 0;
 
     private StorageReference mStorageRef;
     private FirebaseAuth firebaseauth;
@@ -140,6 +143,7 @@ public class Perfil extends AppCompatActivity
         btnSalvar = findViewById(R.id.btnSalvar);
         imgFoto = findViewById(R.id.imgFoto);
         pathArray = new ArrayList<>();
+        progressBar = findViewById(R.id.progressBar);
 
         firebaseauth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -155,19 +159,50 @@ public class Perfil extends AppCompatActivity
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checkPhones() == true){ //se os campos de telefone e celular estiverem preenchidos
-                    if(updateData() == true){ //se a atualização dos dados ocorrer bem
-                        Toast.makeText(getApplicationContext(),"Registro atualizado com sucesso",Toast.LENGTH_LONG).show();
-                    } else{
-                        Toast.makeText(getApplicationContext(),"Erro ao atualizar o registro",Toast.LENGTH_LONG).show();
+                if (pathArray.isEmpty()) {
+                    pathArray.add(0, "vazio");
+                }
+                if (checkPhones() == true) { //se os campos de telefone e celular estiverem preenchidos
+                    if (updateData() == true) { //se a atualização dos dados ocorrer bem
+                        update();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Erro ao atualizar o registro", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(),"Há campos não preenchidos",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Há campos não preenchidos", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
+    //Espera 3segs pra salvar as mudanças e atualizar as informações na activity
+    public void update(){
+        progressBar.setVisibility(View.VISIBLE);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                while (progressStatus < 100) {
+                    progressStatus += 1;
+                    // Update the progress bar and display the
+                    //current value in the text view
+                    handler.post(new Runnable() {
+                        public void run() {
+                            progressBar.setProgress(progressStatus);
+                            //textView.setText(progressStatus+"/"+progressBar.getMax());
+                        }
+                    });
+                }
+                loadData();
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(getApplicationContext(),"Registro atualizado com sucesso",Toast.LENGTH_LONG).show();
+            }
+        }, 3000);
+
+    }
+
+
+    //Libera o LGide para recuperar imagens
     @GlideModule
     public class MyAppGlideModule extends AppGlideModule {
 
@@ -411,13 +446,13 @@ public class Perfil extends AppCompatActivity
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Log.i("uploadPhoto", "Ok");
-                pathArray.clear();
+                //pathArray.clear();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.i("uploadPhoto", "Erro com a foto");
-                pathArray.clear();
+                //pathArray.clear();
             }
         });
     }
@@ -437,7 +472,7 @@ public class Perfil extends AppCompatActivity
             Bitmap imagemGaleria = (BitmapFactory.decodeFile(picturePath));
             Log.i("PathFileImage", picturePath);
             imgFoto.setImageBitmap(imagemGaleria);
-            pathArray.add(picturePath);
+            pathArray.add(0, picturePath);
         }
     }
 

@@ -11,176 +11,188 @@
     android:orientation="vertical"
     tools:showIn="@layout/app_bar_perfil">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgFoto"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp" />
-
-    <TextView
-        android:id="@+id/textNome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:layout_marginTop="15dp"
-        android:fontFamily="sans-serif-black"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/black"
-        />
-
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:columnCount="5"
-        android:rowCount="2">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgFoto"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp" />
 
         <TextView
-            android:text="Você é: "
+            android:id="@+id/textNome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="sans-serif-black"
+            android:layout_gravity="center_horizontal"
             android:textColor="@color/black"
-            android:layout_column="0"
-            android:layout_row="0"/>
+            />
 
-        <RadioGroup
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:columnCount="5"
+            android:rowCount="2">
+
+            <TextView
+                android:text="Você é: "
+                android:textColor="@color/black"
+                android:layout_column="0"
+                android:layout_row="0"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rbCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:button="@drawable/radiodraw"
+                    android:text="Cliente" />
+
+                <RadioButton
+                    android:id="@+id/rbProprietario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:button="@drawable/radiodraw"
+                    android:text="Proprietário" />
+            </RadioGroup>
+
+            <TextView
+                android:text="Sexo: "
+                android:textColor="@color/black"
+                android:layout_marginLeft="40dp"
+                android:layout_column="3"
+                android:layout_row="0"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rbFeminino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:button="@drawable/radiodraw"
+                    android:text="Feminino" />
+
+                <RadioButton
+                    android:id="@+id/rbMasculino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:button="@drawable/radiodraw"
+                    android:text="Masculino" />
+            </RadioGroup>
+
+        </GridLayout>
+
+        <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="2"
+            android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rbCliente"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:button="@drawable/radiodraw"
-                android:text="Cliente" />
+                android:layout_marginTop="15dp"
+                android:layout_column="0"
+                android:layout_row="0"
+                android:textColor="@color/black"
+                android:text="Telefone:"/>
 
-            <RadioButton
-                android:id="@+id/rbProprietario"
+            <EditText
+                android:id="@+id/edtTel"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:inputType="phone"
+                android:background="@drawable/arredondamento"
+                android:paddingLeft="5dp"
+                android:textCursorDrawable="@color/black"/>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:button="@drawable/radiodraw"
-                android:text="Proprietário" />
-        </RadioGroup>
+                android:layout_marginTop="15dp"
+                android:layout_column="1"
+                android:layout_row="0"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/black"
+                android:text="Celular:"/>
 
-        <TextView
-            android:text="Sexo: "
-            android:textColor="@color/black"
-            android:layout_marginLeft="40dp"
-            android:layout_column="3"
-            android:layout_row="0"/>
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/rbFeminino"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/edtCel"
+                android:layout_width="185dp"
                 android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/arredondamento"
+                android:inputType="phone"
                 android:paddingLeft="5dp"
-                android:button="@drawable/radiodraw"
-                android:text="Feminino" />
-
-            <RadioButton
-                android:id="@+id/rbMasculino"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:button="@drawable/radiodraw"
-                android:text="Masculino" />
-        </RadioGroup>
-
-    </GridLayout>
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="2"
-        android:rowCount="2"
-        android:orientation="horizontal">
+                android:textCursorDrawable="@color/black" />
+        </GridLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_column="0"
-            android:layout_row="0"
             android:textColor="@color/black"
-            android:text="Telefone:"/>
+            android:text="E-mail:"/>
 
         <EditText
-            android:id="@+id/edtTel"
-            android:layout_width="180dp"
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:inputType="phone"
+            android:inputType="textEmailAddress"
+            android:clickable="false"
+            android:focusable="false"
+            android:editable="false"
             android:background="@drawable/arredondamento"
             android:paddingLeft="5dp"
             android:textCursorDrawable="@color/black"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_column="1"
-            android:layout_row="0"
-            android:layout_marginLeft="15dp"
-            android:textColor="@color/black"
-            android:text="Celular:"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp">
 
-        <EditText
-            android:id="@+id/edtCel"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/arredondamento"
-            android:inputType="phone"
-            android:paddingLeft="5dp"
-            android:textCursorDrawable="@color/black" />
-    </GridLayout>
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="66dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:indeterminateTint="@color/orange"
+                android:visibility="invisible" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/black"
-        android:text="E-mail:"/>
+            <Button
+                android:id="@+id/btnSalvar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:padding="10dp"
+                android:paddingTop="10dp"
+                android:text="Salvar"
+                android:background="@drawable/arredondamento"/>
 
-    <EditText
-        android:id="@+id/edtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:clickable="false"
-        android:focusable="false"
-        android:editable="false"
-        android:background="@drawable/arredondamento"
-        android:paddingLeft="5dp"
-        android:textCursorDrawable="@color/black"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp">
-
-        <Button
-            android:id="@+id/btnSalvar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:padding="10dp"
-            android:text="Salvar"
-            android:background="@drawable/arredondamento"/>
-
-    </LinearLayout>
 
 </LinearLayout>
