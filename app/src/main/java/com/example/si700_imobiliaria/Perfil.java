@@ -164,7 +164,7 @@ public class Perfil extends AppCompatActivity
                 }
                 if (checkPhones() == true) { //se os campos de telefone e celular estiverem preenchidos
                     if (updateData() == true) { //se a atualização dos dados ocorrer bem
-                        update();
+                        update(); //chama progressBar para esperar a activity atualizar
                     } else {
                         Toast.makeText(getApplicationContext(), "Erro ao atualizar o registro", Toast.LENGTH_LONG).show();
                     }
@@ -193,7 +193,7 @@ public class Perfil extends AppCompatActivity
                         }
                     });
                 }
-                loadData();
+                loadData(); //método para carregar dados
                 progressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(getApplicationContext(),"Registro atualizado com sucesso",Toast.LENGTH_LONG).show();
             }
@@ -202,7 +202,7 @@ public class Perfil extends AppCompatActivity
     }
 
 
-    //Libera o LGide para recuperar imagens
+    //Libera o Glide para recuperar imagens
     @GlideModule
     public class MyAppGlideModule extends AppGlideModule {
 
