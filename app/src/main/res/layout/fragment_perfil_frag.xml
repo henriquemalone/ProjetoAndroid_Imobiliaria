@@ -188,7 +188,6 @@
             android:paddingTop="10dp"
             android:text="Salvar"
             android:background="@drawable/arredondamento"/>
-
     </LinearLayout>
 
 </LinearLayout>

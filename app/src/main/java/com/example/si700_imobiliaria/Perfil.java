@@ -55,6 +55,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -80,15 +81,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Perfil extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private StorageReference mStorageRef;
     private FirebaseAuth firebaseauth;
     private DatabaseReference firebasereference = FirebaseDatabase.getInstance().getReference();
-    private DatabaseReference usuarioReferencia = firebasereference.child("usuarios");
-
-    final String[] nome = new String[1];
-    final String[] sobrenome = new String[1];
-    final String[] email = new String[1];
-    private CircleImageView imgFoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,9 +100,11 @@ public class Perfil extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         setTitle("Perfil");
-        Perfil_frag perfil = new Perfil_frag();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment, perfil).commit();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment, new Perfil_frag()).commit();
+        fragmentTransaction.addToBackStack(null);
+
     }
 
     @Override
@@ -117,8 +113,18 @@ public class Perfil extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment);
+            if (f instanceof Anuncio_finalizado)
+            {
+                ((Anuncio_finalizado)f).onBackPressed();
+            } else {
+                super.onBackPressed();
+            }
         }
+    }
+
+    public interface OnBackPressedListner{
+        boolean onBackPressed();
     }
 
     @Override
@@ -136,9 +142,9 @@ public class Perfil extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -151,14 +157,15 @@ public class Perfil extends AppCompatActivity
 
         if (id == R.id.nav_perfil) {
             setTitle("Perfil");
-            Perfil_frag perfil = new Perfil_frag();
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment, perfil).commit();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, new Perfil_frag()).addToBackStack(null).commit();
+
         } else if (id == R.id.nav_anunciar) {
             setTitle("Anunciar");
-            Anunciar anunciar = new Anunciar();
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment, anunciar).commit();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, new Anunciar()).commit();
 
         } else if (id == R.id.nav_alugar) {
 

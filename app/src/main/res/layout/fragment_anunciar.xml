@@ -1,15 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fundo"
+    android:orientation="vertical"
     tools:context=".Anunciar">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="50dp"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Tipo do imóvel:" />
+
+            <Spinner
+                android:id="@+id/tipos_imoveis"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:columnCount="5"
+                android:rowCount="2">
+
+                <TextView
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:text="O anuncio é para: "
+                    android:textColor="@color/black" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/rbVenda"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/radiodraw"
+                        android:paddingLeft="5dp"
+                        android:text="Venda" />
+
+                    <RadioButton
+                        android:id="@+id/rbLocação"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:button="@drawable/radiodraw"
+                        android:paddingLeft="5dp"
+                        android:text="Locação" />
+                </RadioGroup>
+            </GridLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginTop="15dp"
+                android:text="Endereço:" />
+
+            <EditText
+                android:id="@+id/edtEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/arredondamento"
+                android:paddingLeft="5dp"
+                android:textCursorDrawable="@color/black"/>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:rowCount="4"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_column="0"
+                    android:layout_row="0"
+                    android:textColor="@color/black"
+                    android:text="Número:"/>
+
+                <EditText
+                    android:id="@+id/edtNumero"
+                    android:layout_width="82dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:background="@drawable/arredondamento"
+                    android:inputType="number"
+                    android:paddingLeft="5dp"
+                    android:textCursorDrawable="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_column="1"
+                    android:layout_row="0"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="@color/black"
+                    android:text="Cep:"/>
+
+                <EditText
+                    android:id="@+id/edtCep"
+                    android:layout_width="148dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:inputType="number"
+                    android:background="@drawable/arredondamento"
+                    android:layout_marginLeft="15dp"
+                    android:paddingLeft="5dp"
+                    android:textCursorDrawable="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_column="2"
+                    android:layout_row="0"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="@color/black"
+                    android:text="UF:"/>
+
+                <Spinner
+                    android:id="@+id/uf"
+                    android:layout_row="1"
+                    android:layout_column="2"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </GridLayout>
+
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="4"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_column="0"
+                    android:layout_row="0"
+                    android:textColor="@color/black"
+                    android:text="Cidade:"/>
+
+                <EditText
+                    android:id="@+id/edtCidade"
+                    android:layout_width="148dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:paddingLeft="5dp"
+                    android:background="@drawable/arredondamento"
+                    android:textCursorDrawable="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_column="1"
+                    android:layout_row="0"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="@color/black"
+                    android:text="Bairro:"/>
+
+                <EditText
+                    android:id="@+id/edtBairro"
+                    android:layout_width="203dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/arredondamento"
+                    android:paddingLeft="5dp"
+                    android:textCursorDrawable="@color/black" />
+            </GridLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_column="1"
+                android:layout_row="0"
+                android:textColor="@color/black"
+                android:text="Valor:"/>
+
+            <EditText
+                android:id="@+id/edtValor"
+                android:layout_width="148dp"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:paddingLeft="5dp"
+                android:background="@drawable/arredondamento"
+                android:textCursorDrawable="@color/black" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnProximo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/arredondamento"
+                    android:padding="10dp"
+                    android:paddingTop="10dp"
+                    android:text="Próximo ->" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

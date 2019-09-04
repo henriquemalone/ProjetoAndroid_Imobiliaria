@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:background="@color/fundo"
+    android:orientation="vertical"
+    tools:context=".Anunciar_fotos">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Selecione fotos do imóvel:" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:columnCount="2"
+        android:rowCount="3">
+
+        <ImageView
+            android:id="@+id/foto1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:src="@drawable/house" />
+
+        <TextView
+            android:text="Selecione a foto principal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:textSize="20dp"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:textColor="@color/black"/>
+
+        <ImageView
+            android:id="@+id/foto2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:src="@drawable/house" />
+
+        <TextView
+            android:text="Selecione a foto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:textSize="20dp"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:textColor="@color/black"/>
+
+        <ImageView
+            android:id="@+id/foto3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_column="0"
+            android:layout_row="2"
+            android:src="@drawable/house" />
+
+        <TextView
+            android:text="Selecione a foto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:textSize="20dp"
+            android:layout_column="1"
+            android:layout_row="2"
+            android:textColor="@color/black"/>
+    </GridLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAnunciar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom"
+            android:background="@drawable/arredondamento"
+            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:text="Anunciar" />
+    </LinearLayout>
+
+
+</LinearLayout>
