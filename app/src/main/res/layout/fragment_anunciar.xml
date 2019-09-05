@@ -14,20 +14,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="15dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Tipo do imóvel:" />
+                android:text="Tipo do imóvel:"
+                android:textColor="@color/black" />
 
             <Spinner
                 android:id="@+id/tipos_imoveis"
-                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
 
             <GridLayout
                 android:layout_width="wrap_content"
@@ -68,9 +68,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:layout_marginTop="15dp"
-                android:text="Endereço:" />
+                android:text="Endereço:"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/edtEndereco"
@@ -78,23 +78,23 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/arredondamento"
                 android:paddingLeft="5dp"
-                android:textCursorDrawable="@color/black"/>
+                android:textCursorDrawable="@color/black" />
 
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:columnCount="3"
-                android:rowCount="4"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:rowCount="4">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_column="0"
                     android:layout_row="0"
-                    android:textColor="@color/black"
-                    android:text="Número:"/>
+                    android:layout_column="0"
+                    android:layout_marginTop="15dp"
+                    android:text="Número:"
+                    android:textColor="@color/black" />
 
                 <EditText
                     android:id="@+id/edtNumero"
@@ -110,88 +110,87 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_column="1"
                     android:layout_row="0"
+                    android:layout_column="1"
                     android:layout_marginLeft="15dp"
-                    android:textColor="@color/black"
-                    android:text="Cep:"/>
+                    android:layout_marginTop="15dp"
+                    android:text="Cep:"
+                    android:textColor="@color/black" />
 
                 <EditText
                     android:id="@+id/edtCep"
-                    android:layout_width="148dp"
+                    android:layout_width="147dp"
                     android:layout_height="wrap_content"
                     android:layout_row="1"
                     android:layout_column="1"
-                    android:inputType="number"
-                    android:background="@drawable/arredondamento"
                     android:layout_marginLeft="15dp"
+                    android:background="@drawable/arredondamento"
+                    android:inputType="number"
                     android:paddingLeft="5dp"
                     android:textCursorDrawable="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_column="2"
                     android:layout_row="0"
+                    android:layout_column="2"
                     android:layout_marginLeft="15dp"
-                    android:textColor="@color/black"
-                    android:text="UF:"/>
+                    android:layout_marginTop="15dp"
+                    android:text="UF:"
+                    android:textColor="@color/black" />
 
                 <Spinner
                     android:id="@+id/uf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_row="1"
                     android:layout_column="2"
-                    android:layout_marginLeft="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_marginLeft="15dp" />
             </GridLayout>
 
 
             <GridLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:columnCount="2"
-                android:rowCount="4"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:rowCount="5">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_column="0"
                     android:layout_row="0"
-                    android:textColor="@color/black"
-                    android:text="Cidade:"/>
+                    android:layout_column="0"
+                    android:layout_marginTop="15dp"
+                    android:text="Cidade:"
+                    android:textColor="@color/black" />
 
                 <EditText
                     android:id="@+id/edtCidade"
-                    android:layout_width="148dp"
+                    android:layout_width="244dp"
                     android:layout_height="wrap_content"
                     android:layout_row="1"
                     android:layout_column="0"
-                    android:paddingLeft="5dp"
                     android:background="@drawable/arredondamento"
+                    android:paddingLeft="5dp"
                     android:textCursorDrawable="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_row="2"
+                    android:layout_column="0"
                     android:layout_marginTop="15dp"
-                    android:layout_column="1"
-                    android:layout_row="0"
-                    android:layout_marginLeft="15dp"
-                    android:textColor="@color/black"
-                    android:text="Bairro:"/>
+                    android:text="Bairro:"
+                    android:textColor="@color/black" />
 
                 <EditText
                     android:id="@+id/edtBairro"
-                    android:layout_width="203dp"
+                    android:layout_width="244dp"
                     android:layout_height="wrap_content"
-                    android:layout_row="1"
-                    android:layout_column="1"
-                    android:layout_marginLeft="15dp"
+                    android:layout_row="3"
+                    android:layout_column="0"
+
                     android:background="@drawable/arredondamento"
                     android:paddingLeft="5dp"
                     android:textCursorDrawable="@color/black" />
@@ -200,21 +199,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_column="1"
                 android:layout_row="0"
-                android:textColor="@color/black"
-                android:text="Valor:"/>
+                android:layout_column="1"
+                android:layout_marginTop="15dp"
+                android:text="Valor:"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/edtValor"
                 android:layout_width="148dp"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
                 android:layout_row="1"
                 android:layout_column="1"
-                android:paddingLeft="5dp"
                 android:background="@drawable/arredondamento"
+                android:inputType="numberDecimal"
+                android:paddingLeft="5dp"
                 android:textCursorDrawable="@color/black" />
 
             <LinearLayout

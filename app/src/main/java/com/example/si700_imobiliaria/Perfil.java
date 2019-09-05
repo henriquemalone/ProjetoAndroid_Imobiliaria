@@ -102,8 +102,7 @@ public class Perfil extends AppCompatActivity
         setTitle("Perfil");
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment, new Perfil_frag()).commit();
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.fragment, new Perfil_frag()).addToBackStack(null).commit();
 
     }
 
@@ -165,7 +164,7 @@ public class Perfil extends AppCompatActivity
             setTitle("Anunciar");
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment, new Anunciar()).commit();
+            fragmentTransaction.replace(R.id.fragment, new Anunciar()).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_alugar) {
 

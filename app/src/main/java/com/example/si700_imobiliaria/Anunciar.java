@@ -36,7 +36,7 @@ public class Anunciar extends Fragment {
     private Spinner tipo;
     private Spinner uf;
     private RadioButton locacao;
-    private Button venda;
+    private RadioButton venda;
     private EditText endereco;
     private EditText numero;
     private EditText cep;
@@ -93,22 +93,45 @@ public class Anunciar extends Fragment {
         proximo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(getData() != null){
-                    Anunciar_fotos anunciar_fotos = new Anunciar_fotos();
-                    Bundle bundle = new Bundle();
-                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    bundle.putStringArray("dados", getData());
-                    anunciar_fotos.setArguments(bundle);
-                    fragmentTransaction.replace(R.id.fragment, anunciar_fotos ,"NewFragmentTag");
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+                if(checkFields() == 0){
+                    if(getData() != null){
+                        Anunciar_fotos anunciar_fotos = new Anunciar_fotos();
+                        Bundle bundle = new Bundle();
+                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                        bundle.putStringArray("dados", getData());
+                        anunciar_fotos.setArguments(bundle);
+                        fragmentTransaction.replace(R.id.fragment, anunciar_fotos ,"NewFragmentTag");
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    } else{
+                        Toast.makeText(getActivity(),"Erro ao publicar anuncio",Toast.LENGTH_LONG).show();
+                    }
                 } else{
-                    Toast.makeText(getActivity(),"Erro ao publicar anuncio",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),"Há campos não preenchidos",Toast.LENGTH_LONG).show();
                 }
             }
         });
 
         return view;
+    }
+
+    //Verifica se todos os campos foram preenchdios. Caso não, a variável aux sera incrementado +1
+    public int checkFields(){
+        int aux = 0;
+
+        //Checa se o radio button foi selecionado
+        if(locacao.isChecked() == false && venda.isChecked() == false){
+            aux++;
+        }
+
+        //Checa se os campos foram preenchidos
+        if(endereco.getText().toString().equals("") || numero.getText().toString().equals("") ||
+                cep.getText().toString().equals("") || cidade.getText().toString().equals("") ||
+                bairro.getText().toString().equals("") || valor.getText().toString().equals("")){
+            aux++;
+        }
+
+        return aux;
     }
 
     public String[] getData(){
@@ -138,5 +161,7 @@ public class Anunciar extends Fragment {
         }
 
     }
+
+
 
 }

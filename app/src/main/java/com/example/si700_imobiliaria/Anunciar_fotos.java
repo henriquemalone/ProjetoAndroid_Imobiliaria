@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Anunciar_fotos extends Fragment {
+public class Anunciar_fotos extends Fragment{
 
     private Button anunciar;
 
@@ -108,4 +108,5 @@ public class Anunciar_fotos extends Fragment {
             return false;
         }
     }
+
 }

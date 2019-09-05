@@ -1,6 +1,7 @@
 package com.example.si700_imobiliaria;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -37,8 +38,8 @@ public class Anuncio_finalizado extends Fragment implements Perfil.OnBackPressed
 
     @Override
     public boolean onBackPressed() {
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.popBackStack(fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-2).getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        Intent i = new Intent(getActivity(), Perfil.class);
+        getActivity().startActivityForResult(i, 1);
         return false;
     }
 
