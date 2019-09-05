@@ -53,7 +53,6 @@ public class Anunciar extends Fragment {
     private EditText valor;
 
     private FirebaseAuth firebaseauth;
-    private StorageReference mStorageRef;
     private DatabaseReference firebasereference = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference usuarioReferencia = firebasereference.child("usuarios");
 

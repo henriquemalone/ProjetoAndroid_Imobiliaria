@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,11 +23,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
@@ -44,11 +51,13 @@ public class Anunciar_fotos extends Fragment{
     private LinearLayout layou1;
     private LinearLayout layou2;
     private LinearLayout layou3;
+    private String id;
 
     private final int GALERIA_IMAGENS = 1;
     private ArrayList<String> pathArray;
     private int clicked = 0;
 
+    private StorageReference mStorageRef;
     private FirebaseAuth firebaseauth;
     private DatabaseReference firebasereference = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference anuncioReferencia = firebasereference.child("anuncios");
@@ -73,6 +82,9 @@ public class Anunciar_fotos extends Fragment{
         layou3 = view.findViewById(R.id.layout3);
         pathArray = new ArrayList<>();
 
+        firebaseauth = FirebaseAuth.getInstance();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+
         getActivity().setTitle("Anunciar");
 
         anunciar.setOnClickListener(new View.OnClickListener() {
@@ -80,12 +92,18 @@ public class Anunciar_fotos extends Fragment{
             public void onClick(View view) {
                 if(getData() != null){
                     if(savePublish() == true){
-                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment, new Anuncio_finalizado()).commit();
+                        if(savePhoto() == true){
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment, new Anuncio_finalizado()).commit();
+                        } else{
+                            Toast.makeText(getActivity(),"Erro Fotos",Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getActivity(),"Erro Publicação",Toast.LENGTH_SHORT).show();
                     }
                 } else{
-                    Toast.makeText(getActivity(),"Erro",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Erro Dados",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -157,13 +175,46 @@ public class Anunciar_fotos extends Fragment{
             anuncio.setTelefone(getData()[11]);
             anuncio.setAnunciante(user.getUid());
 
-            anuncioReferencia.push().setValue(anuncio); //salva dados no banco de dados firebase e usa o UID como ID*/
-            Log.i("savePublish",getData()[11]);
+            id = anuncioReferencia.push().getKey();
+            anuncioReferencia.child(id).setValue(anuncio); //salva dados no banco de dados firebase e usa o UID como ID*/
+            Log.i("savePublish",id);
             Log.i("savePublish", "ok");
 
             return true;
         } catch (Exception e){
             Log.i("savePublish", e.toString());
+
+            return false;
+        }
+    }
+
+    //Salva foto do anuncio no Storage Firebase
+    public boolean savePhoto(){
+        int i = 0;
+
+        try {
+            for (i = 0; i < 3; i++) {
+                final String aux = String.valueOf(i);
+                Uri uri = Uri.fromFile(new File(pathArray.get(i)));
+                StorageReference storagereference = mStorageRef.child("FotosAnuncio/" + id + "/" + id + "_" + aux + ".jpg");
+                Log.i("uploadPhoto", aux);
+                storagereference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        //pathArray.clear();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i("uploadPhoto", "Erro com a foto");
+                        //pathArray.clear();
+                    }
+                });
+            }
+
+            return true;
+        } catch (Exception e) {
+            Log.i("uploadPhoto", e.toString());
 
             return false;
         }
@@ -193,7 +244,6 @@ public class Anunciar_fotos extends Fragment{
             if(clicked == 3){
                 setFoto3(imagemGaleria);
             }
-
             pathArray.add(0, picturePath);
         }
     }
