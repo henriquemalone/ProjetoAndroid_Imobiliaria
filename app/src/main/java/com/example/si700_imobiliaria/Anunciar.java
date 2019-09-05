@@ -81,7 +81,7 @@ public class Anunciar extends Fragment {
         valor = view.findViewById(R.id.edtValor);
 
         getActivity().setTitle("Anunciar");
-        loadContact();
+        loadContact(); //carrega dados de contato do usuário na array
 
         //Cria menu dropdown Tipo de imovel
         tipo = (Spinner) view.findViewById(R.id.tipos_imoveis);
@@ -110,10 +110,11 @@ public class Anunciar extends Fragment {
             public void onClick(View view) {
                 if(checkFields() == 0){
                     if(getData() != null){
+                        //Abre a fragment Anunciar_fotos e enviar os dados preenchidos do anuncio
                         Anunciar_fotos anunciar_fotos = new Anunciar_fotos();
                         Bundle bundle = new Bundle();
                         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                        bundle.putStringArray("dados", getData());
+                        bundle.putStringArray("dados", getData()); //dados do anuncio
                         anunciar_fotos.setArguments(bundle);
                         fragmentTransaction.replace(R.id.fragment, anunciar_fotos ,"NewFragmentTag");
                         fragmentTransaction.addToBackStack(null);
@@ -130,7 +131,7 @@ public class Anunciar extends Fragment {
         return view;
     }
 
-    //Carrega contatos do usuário
+    //Carrega contatos do usuário e coloca nuam array
     public void loadContact(){
         firebaseauth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseauth.getCurrentUser();
@@ -169,6 +170,7 @@ public class Anunciar extends Fragment {
         return aux;
     }
 
+    //Preenche array com os dados do anuncio
     public String[] getData(){
         String aux;
 

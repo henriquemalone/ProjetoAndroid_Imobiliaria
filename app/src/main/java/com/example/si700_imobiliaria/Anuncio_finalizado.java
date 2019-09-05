@@ -36,6 +36,7 @@ public class Anuncio_finalizado extends Fragment implements Perfil.OnBackPressed
         return  view;
     }
 
+    //retorna pra fragment Perfil
     @Override
     public boolean onBackPressed() {
         Intent i = new Intent(getActivity(), Perfil.class);

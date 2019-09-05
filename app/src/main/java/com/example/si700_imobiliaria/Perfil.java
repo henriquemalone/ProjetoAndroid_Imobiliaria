@@ -166,6 +166,8 @@ public class Perfil extends AppCompatActivity
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragment, new Anunciar()).addToBackStack(null).commit();
 
+        } else if (id == R.id.nav_meusAnuncios) {
+
         } else if (id == R.id.nav_alugar) {
 
         } else if (id == R.id.nav_comprar) {

@@ -93,6 +93,7 @@ public class Anunciar_fotos extends Fragment{
                 if(getData() != null){
                     if(savePublish() == true){
                         if(savePhoto() == true){
+                            //Abre fragment Anuncio finalizado
                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                             fragmentTransaction.replace(R.id.fragment, new Anuncio_finalizado()).commit();
@@ -108,28 +109,34 @@ public class Anunciar_fotos extends Fragment{
             }
         });
 
+        //Botão layout 1
         layou1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clicked = 1;
+                //abre galeria
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, GALERIA_IMAGENS);
             }
         });
 
+        //Botão layout 2
         layou2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clicked = 2;
+                //abre galeria
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, GALERIA_IMAGENS);
             }
         });
 
+        //Botão layout 3
         layou3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clicked = 3;
+                //abre galeria
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, GALERIA_IMAGENS);
             }
@@ -137,6 +144,7 @@ public class Anunciar_fotos extends Fragment{
         return view;
     }
 
+    //Recebe dados do anuncio preenchidos pelo usuário
     public String[] getData(){
         String[] dados = null;
         try{
@@ -144,9 +152,8 @@ public class Anunciar_fotos extends Fragment{
             if(mBundle != null) {
                 mBundle = getArguments();
                 dados = mBundle.getStringArray("dados");
-                Log.i("getData", dados[0]+dados[1]+dados[2]+dados[3]+dados[4]+dados[5]+dados[6]+dados[7]+dados[8]);
+                //Log.i("getData", dados[0]+dados[1]+dados[2]+dados[3]+dados[4]+dados[5]+dados[6]+dados[7]+dados[8]);
             }
-
             return dados;
         } catch(Exception e){
             Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_SHORT).show();
@@ -155,6 +162,7 @@ public class Anunciar_fotos extends Fragment{
         }
     }
 
+    //Salva anuncio
     public boolean savePublish(){
         Anuncio anuncio = new Anuncio();
         firebaseauth = FirebaseAuth.getInstance();
@@ -175,7 +183,7 @@ public class Anunciar_fotos extends Fragment{
             anuncio.setTelefone(getData()[11]);
             anuncio.setAnunciante(user.getUid());
 
-            id = anuncioReferencia.push().getKey();
+            id = anuncioReferencia.push().getKey(); //recebe ID do anuncio
             anuncioReferencia.child(id).setValue(anuncio); //salva dados no banco de dados firebase e usa o UID como ID*/
             Log.i("savePublish",id);
             Log.i("savePublish", "ok");
@@ -248,14 +256,17 @@ public class Anunciar_fotos extends Fragment{
         }
     }
 
+    //Carrega foto selecionada no bitmap 1
     public void setFoto1(Bitmap imagemGaleria){
         foto1.setImageBitmap(imagemGaleria);
     }
 
+    //Carrega foto selecionada no bitmap 2
     public void setFoto2(Bitmap imagemGaleria){
         foto2.setImageBitmap(imagemGaleria);
     }
 
+    //Carrega foto selecionada no bitmap 3
     public void setFoto3(Bitmap imagemGaleria){
         foto3.setImageBitmap(imagemGaleria);
     }

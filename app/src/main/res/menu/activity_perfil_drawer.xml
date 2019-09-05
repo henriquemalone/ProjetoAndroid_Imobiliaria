@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_menu_anunciar"
             android:title="@string/menu_anunciar" />
         <item
+            android:id="@+id/nav_meusAnuncios"
+            android:icon="@drawable/ic_menu_meus"
+            android:title="@string/menu_meusAnuncios" />
+        <item
             android:id="@+id/nav_alugar"
             android:icon="@drawable/ic_menu_alugar"
             android:title="@string/menu_alugar" />

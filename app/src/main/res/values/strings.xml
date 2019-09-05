@@ -10,6 +10,7 @@
 
     <string name="menu_perfil">Perfil</string>
     <string name="menu_anunciar">Anunciar</string>
+    <string name="menu_meusAnuncios">Meus anuncios</string>
     <string name="menu_alugar">Alugar</string>
     <string name="menu_comprar">Comprar</string>
     <string name="menu_sair">Sair</string>
