@@ -9,7 +9,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/arredondamento"
                 android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:textCursorDrawable="@color/black" />
 
             <GridLayout
@@ -105,6 +106,7 @@
                     android:background="@drawable/arredondamento"
                     android:inputType="number"
                     android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:textCursorDrawable="@color/black" />
 
                 <TextView
@@ -127,6 +129,7 @@
                     android:background="@drawable/arredondamento"
                     android:inputType="number"
                     android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:textCursorDrawable="@color/black" />
 
                 <TextView
@@ -173,6 +176,7 @@
                     android:layout_column="0"
                     android:background="@drawable/arredondamento"
                     android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:textCursorDrawable="@color/black" />
 
                 <TextView
@@ -190,9 +194,9 @@
                     android:layout_height="wrap_content"
                     android:layout_row="3"
                     android:layout_column="0"
-
                     android:background="@drawable/arredondamento"
                     android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:textCursorDrawable="@color/black" />
             </GridLayout>
 
@@ -214,28 +218,28 @@
                 android:background="@drawable/arredondamento"
                 android:inputType="numberDecimal"
                 android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:textCursorDrawable="@color/black" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnProximo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/arredondamento"
-                    android:padding="10dp"
-                    android:paddingTop="10dp"
-                    android:text="Próximo ->" />
-            </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:padding="15dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnProximo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom"
+            android:background="@drawable/arredondamento"
+            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:text="Próximo ->" />
+    </LinearLayout>
 
 </LinearLayout>

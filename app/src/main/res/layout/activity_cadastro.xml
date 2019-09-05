@@ -73,6 +73,7 @@
                     android:layout_column="0"
                     android:background="@drawable/arredondamento"
                     android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:textCursorDrawable="@color/black"/>
 
                 <TextView
@@ -94,6 +95,7 @@
                     android:layout_marginLeft="15dp"
                     android:background="@drawable/arredondamento"
                     android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:textCursorDrawable="@color/black" />
 
             </GridLayout>
@@ -152,6 +154,7 @@
                     android:inputType="phone"
                     android:background="@drawable/arredondamento"
                     android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:textCursorDrawable="@color/black"/>
 
                 <TextView
@@ -174,6 +177,7 @@
                     android:background="@drawable/arredondamento"
                     android:inputType="phone"
                     android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:textCursorDrawable="@color/black" />
 
             </GridLayout>
@@ -192,6 +196,7 @@
                 android:inputType="textEmailAddress"
                 android:background="@drawable/arredondamento"
                 android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:textCursorDrawable="@color/black"/>
 
             <TextView
@@ -208,6 +213,7 @@
                 android:inputType="textEmailAddress"
                 android:background="@drawable/arredondamento"
                 android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:textCursorDrawable="@color/black"/>
 
             <TextView
@@ -224,6 +230,7 @@
                 android:inputType="textPassword"
                 android:background="@drawable/arredondamento"
                 android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:textCursorDrawable="@color/black"/>
 
             <TextView
@@ -239,6 +246,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:background="@drawable/arredondamento"/>
 
             <ProgressBar

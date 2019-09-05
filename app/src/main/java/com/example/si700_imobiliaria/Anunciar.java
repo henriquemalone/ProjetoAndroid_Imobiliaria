@@ -4,6 +4,7 @@ package com.example.si700_imobiliaria;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,6 +21,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
@@ -45,6 +53,13 @@ public class Anunciar extends Fragment {
     private EditText valor;
 
     private FirebaseAuth firebaseauth;
+    private StorageReference mStorageRef;
+    private DatabaseReference firebasereference = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference usuarioReferencia = firebasereference.child("usuarios");
+
+    final String[] email = new String[1];
+    final String[] telefone = new String[1];
+    final String[] celular = new String[1];
 
     public Anunciar() {
         // Required empty public constructor
@@ -67,6 +82,7 @@ public class Anunciar extends Fragment {
         valor = view.findViewById(R.id.edtValor);
 
         getActivity().setTitle("Anunciar");
+        loadContact();
 
         //Cria menu dropdown Tipo de imovel
         tipo = (Spinner) view.findViewById(R.id.tipos_imoveis);
@@ -115,6 +131,26 @@ public class Anunciar extends Fragment {
         return view;
     }
 
+    //Carrega contatos do usuário
+    public void loadContact(){
+        firebaseauth = FirebaseAuth.getInstance();
+        final FirebaseUser user = firebaseauth.getCurrentUser();
+
+        usuarioReferencia.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                email[0] = dataSnapshot.child("email").getValue().toString();
+                celular[0] = dataSnapshot.child("telefone").getValue().toString();
+                telefone[0] = dataSnapshot.child("celular").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     //Verifica se todos os campos foram preenchdios. Caso não, a variável aux sera incrementado +1
     public int checkFields(){
         int aux = 0;
@@ -152,7 +188,10 @@ public class Anunciar extends Fragment {
                     cep.getText().toString(),
                     cidade.getText().toString(),
                     bairro.getText().toString(),
-                    String.valueOf(Float.valueOf(valor.getText().toString()))};
+                    String.valueOf(Float.valueOf(valor.getText().toString())),
+                    email[0],
+                    telefone[0],
+                    celular[0]};
 
             return dados;
         } catch (Exception e){

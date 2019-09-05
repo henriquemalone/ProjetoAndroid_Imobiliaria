@@ -8,85 +8,109 @@
     android:orientation="vertical"
     tools:context=".Anunciar_fotos">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:text="Selecione fotos do imóvel:" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:columnCount="2"
-        android:rowCount="3">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/foto1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="center"
-            android:layout_column="0"
-            android:layout_row="0"
-            android:src="@drawable/house" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:text="Selecione fotos do imóvel:" />
 
-        <TextView
-            android:text="Selecione a foto principal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:textSize="10dp"
-            android:layout_column="1"
-            android:layout_row="0"
-            android:textColor="@color/black"/>
+            <LinearLayout
+                android:id="@+id/layout1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
 
-        <ImageView
-            android:id="@+id/foto2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:layout_column="0"
-            android:layout_row="1"
-            android:src="@drawable/house" />
+                <ImageView
+                    android:id="@+id/foto1"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/house" />
 
-        <TextView
-            android:text="Selecione a foto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:textSize="10dp"
-            android:layout_column="1"
-            android:layout_row="1"
-            android:textColor="@color/black"/>
+                <TextView
+                    android:text="Selecione a foto principal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="10dp"
+                    android:layout_column="1"
+                    android:layout_row="0"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
 
-        <ImageView
-            android:id="@+id/foto3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:layout_column="0"
-            android:layout_row="2"
-            android:src="@drawable/house" />
+            <LinearLayout
+                android:id="@+id/layout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
 
-        <TextView
-            android:text="Selecione a foto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:textSize="10dp"
-            android:layout_column="1"
-            android:layout_row="2"
-            android:textColor="@color/black"/>
-    </GridLayout>
+                <ImageView
+                    android:id="@+id/foto2"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_column="0"
+                    android:layout_row="1"
+                    android:src="@drawable/house" />
+
+                <TextView
+                    android:text="Selecione a foto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="10dp"
+                    android:layout_column="1"
+                    android:layout_row="1"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/foto3"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_column="0"
+                    android:layout_row="2"
+                    android:src="@drawable/house" />
+
+                <TextView
+                    android:text="Selecione a foto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="10dp"
+                    android:layout_column="1"
+                    android:layout_row="2"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -105,6 +129,5 @@
             android:paddingTop="10dp"
             android:text="Anunciar" />
     </LinearLayout>
-
 
 </LinearLayout>
