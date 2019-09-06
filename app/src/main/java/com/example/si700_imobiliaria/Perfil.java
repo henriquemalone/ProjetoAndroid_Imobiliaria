@@ -167,6 +167,10 @@ public class Perfil extends AppCompatActivity
             fragmentTransaction.replace(R.id.fragment, new Anunciar()).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_meusAnuncios) {
+            setTitle("Meus anuncios");
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, new MeusAnuncios()).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_alugar) {
 

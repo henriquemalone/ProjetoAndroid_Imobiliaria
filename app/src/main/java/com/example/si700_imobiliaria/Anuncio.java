@@ -15,9 +15,33 @@ public class Anuncio {
     private String email;
     private String modalidade;
     private String anunciante;
+    private String id;
+
+    public Anuncio(String tipo, String endereco, String numero, String cep, String bairro, String cidade, String uf,
+                   float valor, String telefone, String celular, String email, String modalidade, String anunciante, String id){
+        this.tipo = tipo;
+        this.endereco = endereco;
+        this.numero = numero;
+        this.cep = cep;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.valor = valor;
+        this.telefone = telefone;
+        this.celular = celular;
+        this.email = email;
+        this.modalidade = modalidade;
+        this.anunciante = anunciante;
+        this.id = id;
+    }
 
     public Anuncio(){
 
+    }
+
+    public String toString(){
+        return this.id + "\n" + "Valor: " + "R$"+ valor + "\n" + "Cidade: " + cidade + "\n" + "Bairro: " + bairro + "\n" +
+                "Endereço: " + endereco;
     }
 
     public String getTipo() {
@@ -120,7 +144,17 @@ public class Anuncio {
         return anunciante;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public void setAnunciante(String anunciante) {
         this.anunciante = anunciante;
     }
+
+
 }
