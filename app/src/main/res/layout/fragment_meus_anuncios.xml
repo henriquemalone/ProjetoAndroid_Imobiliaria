@@ -7,16 +7,12 @@
     android:orientation="vertical"
     tools:context=".MeusAnuncios">
 
-    <ListView
-        android:id="@+id/list"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="15dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </ListView>
+        android:clipToPadding="false"
+        android:scrollbars="vertical">
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

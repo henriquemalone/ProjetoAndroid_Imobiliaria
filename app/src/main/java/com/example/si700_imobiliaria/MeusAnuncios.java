@@ -1,19 +1,29 @@
 package com.example.si700_imobiliaria;
 
 
+import android.app.ProgressDialog;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -21,10 +31,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -34,11 +50,14 @@ public class MeusAnuncios extends Fragment {
 
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference anunciosReferencia = databaseReference.child("anuncios");
-    ListView listView;
-    ArrayList<String> arrayList = new ArrayList<>();
-    ArrayAdapter<String> arrayAdapter;
-
     private FirebaseAuth firebaseauth;
+
+    ProgressDialog progressDialog;
+
+    List<Anuncio> list = new ArrayList<>();
+    RecyclerView recyclerView;
+    RecyclerView.Adapter adapter ;
+    ImageView teste;
 
     public MeusAnuncios() {
         // Required empty public constructor
@@ -53,48 +72,52 @@ public class MeusAnuncios extends Fragment {
 
         firebaseauth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseauth.getCurrentUser();
+        recyclerView = view.findViewById(R.id.recycle);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading Data from Firebase Database");
+        progressDialog.show();
+        teste = view.findViewById(R.id.foto);
 
-        //anunciosReferencia = FirebaseDatabase.getInstance().getReference("anuncios").orderByChild("anunciante").equalTo(user.getUid());
-        listView = view.findViewById(R.id.list);
-        arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1);
-        listView.setAdapter(arrayAdapter);
-        anunciosReferencia.orderByChild("anunciante").equalTo(user.getUid()).addChildEventListener(new ChildEventListener() {
+        anunciosReferencia.orderByChild("anunciante").equalTo(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                //Log.i("lista", databaseReference.toString());
-                //dataSnapshot.getValue(Anuncio.class);
-                Anuncio anuncio = new Anuncio();
-                anuncio.setId(dataSnapshot.getKey());
-                anuncio.setCidade(dataSnapshot.child("cidade").getValue().toString());
-                anuncio.setBairro(dataSnapshot.child("bairro").getValue().toString());
-                anuncio.setCidade(dataSnapshot.child("endereco").getValue().toString());
-                anuncio.setValor(Float.parseFloat(dataSnapshot.child("valor").getValue().toString()));
-                String anuncioString = String.valueOf(anuncio);
-                arrayAdapter.add(anuncioString);
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    final Anuncio anuncio = dataSnapshot.getValue(Anuncio.class);
+                    anuncio.setId(dataSnapshot.getKey());
+                    String id = dataSnapshot.getKey();
+                    System.out.println(id);
+                    //list.add(anuncio);
+
+                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                    StorageReference dateRef = storageRef.child("FotosAnuncio/"+id+
+                            "/"+ id + "_0.jpg");
+                    dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>(){
+                        @Override
+                        public void onSuccess(Uri downloadUrl)
+                        {
+                            anuncio.setTeste(downloadUrl);
+                            //System.out.println(downloadUrl);
+                        }
+                    });
+
+                    list.add(anuncio);
+                }
+
+                System.out.println(list + "teste");
+
+                adapter = new Adapter(getActivity(), list);
+                recyclerView.setAdapter(adapter);
+                progressDialog.dismiss();
             }
 
             @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            public void onCancelled(DatabaseError databaseError) {
 
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                progressDialog.dismiss();
             }
         });
-
         return view;
     }
-
 }

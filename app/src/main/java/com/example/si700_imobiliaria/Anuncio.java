@@ -1,5 +1,7 @@
 package com.example.si700_imobiliaria;
 
+import android.net.Uri;
+
 public class Anuncio {
 
     private String tipo;
@@ -16,9 +18,17 @@ public class Anuncio {
     private String modalidade;
     private String anunciante;
     private String id;
+    private int foto;
+    private boolean state;
+    private Uri teste;
+
+    public Anuncio(){
+
+    }
 
     public Anuncio(String tipo, String endereco, String numero, String cep, String bairro, String cidade, String uf,
-                   float valor, String telefone, String celular, String email, String modalidade, String anunciante, String id){
+                   float valor, String telefone, String celular, String email, String modalidade, String anunciante, String id, int foto,
+                   Uri teste){
         this.tipo = tipo;
         this.endereco = endereco;
         this.numero = numero;
@@ -33,11 +43,10 @@ public class Anuncio {
         this.modalidade = modalidade;
         this.anunciante = anunciante;
         this.id = id;
+        this.foto = foto;
+        this.teste = teste;
     }
 
-    public Anuncio(){
-
-    }
 
     public String toString(){
         return this.id + "\n" + "Valor: " + "R$"+ valor + "\n" + "Cidade: " + cidade + "\n" + "Bairro: " + bairro + "\n" +
@@ -156,5 +165,27 @@ public class Anuncio {
         this.anunciante = anunciante;
     }
 
+    public int getFoto() {
+        return foto;
+    }
 
+    public void setFoto(int foto) {
+        this.foto = foto;
+    }
+
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
+    }
+
+    public Uri getTeste() {
+        return teste;
+    }
+
+    public void setTeste(Uri teste) {
+        this.teste = teste;
+    }
 }
