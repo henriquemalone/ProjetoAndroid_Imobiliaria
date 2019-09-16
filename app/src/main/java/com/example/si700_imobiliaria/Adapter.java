@@ -56,11 +56,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         holder.cidade.setText(anuncio.getCidade());
         holder.bairro.setText(anuncio.getBairro());
         holder.endereco.setText(anuncio.getEndereco());
-        holder.foto.setImageURI(anuncio.getTeste());
+        //holder.foto.setImageURI(Uri.parse(anuncio.getTeste().toString()));
+        Glide.with(context)
+                .load(anuncio.getTeste())
+                .into(holder.foto);
     }
 
     @Override
     public int getItemCount() {
+        //System.out.println(MainImageUploadInfoList.size());
         return MainImageUploadInfoList.size();
     }
 

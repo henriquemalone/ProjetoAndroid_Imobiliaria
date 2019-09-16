@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +44,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static android.icu.lang.UCharacter.DecompositionType.VERTICAL;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,6 +55,7 @@ public class MeusAnuncios extends Fragment {
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference anunciosReferencia = databaseReference.child("anuncios");
     private FirebaseAuth firebaseauth;
+    private StorageReference storageRef;
 
     ProgressDialog progressDialog;
 
@@ -79,6 +84,7 @@ public class MeusAnuncios extends Fragment {
         progressDialog.setMessage("Loading Data from Firebase Database");
         progressDialog.show();
         teste = view.findViewById(R.id.foto);
+        storageRef = FirebaseStorage.getInstance().getReference();
 
         anunciosReferencia.orderByChild("anunciante").equalTo(user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -88,24 +94,29 @@ public class MeusAnuncios extends Fragment {
                     anuncio.setId(dataSnapshot.getKey());
                     String id = dataSnapshot.getKey();
                     System.out.println(id);
-                    //list.add(anuncio);
 
-                    StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-                    StorageReference dateRef = storageRef.child("FotosAnuncio/"+id+
-                            "/"+ id + "_0.jpg");
-                    dateRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>(){
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("/FotosAnuncio/" + id + "/" + id +"_2.jpg"); // get reference of shop_id named logo
+                    storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
-                        public void onSuccess(Uri downloadUrl)
-                        {
-                            anuncio.setTeste(downloadUrl);
-                            //System.out.println(downloadUrl);
+                        public void onSuccess(Uri uri) {
+                            // puttindg logo from Firebase Storage to Image View
+                            System.out.println(uri);
+                            anuncio.setTeste(uri);// adding to list
+                            list.add(anuncio);
+                            // change event listener for in databaess
+                            adapter.notifyDataSetChanged();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            list.add(anuncio);
+                            // change event listener for in databaess
+                            adapter.notifyDataSetChanged();
                         }
                     });
-
-                    list.add(anuncio);
+                    System.out.println(list);
+                    //ist.add(anuncio);
                 }
-
-                System.out.println(list + "teste");
 
                 adapter = new Adapter(getActivity(), list);
                 recyclerView.setAdapter(adapter);
@@ -118,6 +129,10 @@ public class MeusAnuncios extends Fragment {
                 progressDialog.dismiss();
             }
         });
+
+        DividerItemDecoration decoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(decoration);
+
         return view;
     }
 }
