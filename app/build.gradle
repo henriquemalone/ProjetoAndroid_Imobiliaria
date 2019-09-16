@@ -62,7 +62,7 @@ dependencies {
     implementation 'android.arch.paging:runtime:1.0.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    implementation ('com.github.thekhaeng:recycler-margin:1.2.1') {
+    implementation('com.github.thekhaeng:recycler-margin:1.2.1') {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
 

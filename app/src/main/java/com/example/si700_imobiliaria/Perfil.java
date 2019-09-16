@@ -173,8 +173,15 @@ public class Perfil extends AppCompatActivity
             fragmentTransaction.replace(R.id.fragment, new MeusAnuncios()).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_alugar) {
-
+            setTitle("Locação");
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, new Alugar()).addToBackStack(null).commit();
         } else if (id == R.id.nav_comprar) {
+            setTitle("Venda");
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, new Venda()).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_sair) {
             Log.i("logOut", "saiu");
