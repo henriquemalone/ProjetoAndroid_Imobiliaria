@@ -110,4 +110,35 @@ public class Venda extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        list.clear();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        list.clear();
+        onDestroy();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        list.clear();
+        onDestroy();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        list.clear();
+    }
+
 }

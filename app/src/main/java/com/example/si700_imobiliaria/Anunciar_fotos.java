@@ -188,6 +188,11 @@ public class Anunciar_fotos extends Fragment{
             Log.i("savePublish",id);
             Log.i("savePublish", "ok");
 
+            Anuncio_finalizado anuncio_finalizado = new Anuncio_finalizado();
+            Bundle data = new Bundle();
+            data.putString("chave",id);
+            anuncio_finalizado.setArguments(data);
+
             return true;
         } catch (Exception e){
             Log.i("savePublish", e.toString());

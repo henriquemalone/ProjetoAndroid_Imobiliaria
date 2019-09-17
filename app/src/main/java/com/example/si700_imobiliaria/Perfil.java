@@ -191,7 +191,10 @@ public class Perfil extends AppCompatActivity
 
             return true;
         } else if (id == R.id.nav_feedback) {
-
+            setTitle("Feedback");
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, new MailFragment()).addToBackStack(null).commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

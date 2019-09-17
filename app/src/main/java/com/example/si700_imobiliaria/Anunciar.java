@@ -201,7 +201,4 @@ public class Anunciar extends Fragment {
         }
 
     }
-
-
-
 }

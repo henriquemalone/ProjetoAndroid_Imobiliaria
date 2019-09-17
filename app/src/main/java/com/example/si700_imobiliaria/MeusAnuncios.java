@@ -74,9 +74,11 @@ public class MeusAnuncios extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_meus_anuncios, container, false);
 
+        recyclerView = view.findViewById(R.id.recycle);
+
+        recyclerView.getRecycledViewPool().clear();
         firebaseauth = FirebaseAuth.getInstance();
         final FirebaseUser user = firebaseauth.getCurrentUser();
-        recyclerView = view.findViewById(R.id.recycle);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         progressDialog = new ProgressDialog(getActivity());
@@ -134,5 +136,36 @@ public class MeusAnuncios extends Fragment {
         recyclerView.addItemDecoration(decoration);
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        list.clear();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        list.clear();
+        onDestroy();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        list.clear();
+        onDestroy();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        list.clear();
     }
 }

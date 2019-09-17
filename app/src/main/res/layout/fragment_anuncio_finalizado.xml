@@ -50,15 +50,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingTop="20dp"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btnVer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/arredondamento"
-            android:padding="10dp"
-            android:text="Ver anuncio" />
-    </LinearLayout>
+        android:orientation="vertical"/>
 
 </LinearLayout>

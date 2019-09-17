@@ -36,6 +36,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'com.firebaseui:firebase-ui-storage:3.3.0'
+    implementation 'com.sun.mail:android-mail:1.5.5'
+    implementation 'com.sun.mail:android-activation:1.5.5'
     //noinspection GradleCompatible
     implementation 'com.android.support:design:27.0.2'
     //noinspection GradleCompatible

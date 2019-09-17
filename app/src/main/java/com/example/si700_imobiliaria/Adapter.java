@@ -2,6 +2,7 @@ package com.example.si700_imobiliaria;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -33,7 +38,6 @@ import static java.security.AccessController.getContext;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
     Context context;
     List<Anuncio> MainImageUploadInfoList;
-    private FirebaseAuth firebaseauth;
 
     public Adapter(Context context, List<Anuncio> TempList) {
         this.MainImageUploadInfoList = TempList;
@@ -41,9 +45,30 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_layout, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        final ViewHolder viewHolder = new ViewHolder(view);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String id;
+
+                id = viewHolder.id.getText().toString();
+
+                verAnuncio verAnuncio = new verAnuncio();
+                Bundle data = new Bundle();
+                data.putString("chave",id);
+                verAnuncio.setArguments(data);
+
+
+                System.out.println(id+" - adapter");
+
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment, verAnuncio).addToBackStack(null).commit();
+
+            }
+        });
 
         return viewHolder;
     }
