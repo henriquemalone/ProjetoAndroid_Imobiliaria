@@ -8,276 +8,284 @@
     android:orientation="vertical"
     tools:context=".verAnuncio">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/foto1"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_margin="5dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/foto2"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_margin="5dp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/foto3"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_margin="5dp"/>
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/foto1"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_margin="5dp"/>
 
-    <TextView
-        android:id="@+id/modalidade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:text="modalidade"/>
+                <ImageView
+                    android:id="@+id/foto2"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_margin="5dp"/>
 
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/foto3"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="0"
-            android:layout_gravity="right"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:text="Tipo: "/>
+            <TextView
+                android:id="@+id/modalidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="modalidade"/>
 
-        <TextView
-            android:id="@+id/tipo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="0"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:text="tipo "/>
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="1"
-            android:layout_gravity="right"
-            android:textColor="@color/black"
-            android:text="Endereço: "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="0"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="10dp"
+                    android:text="Tipo: "/>
 
-        <TextView
-            android:id="@+id/endereco"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="1"
-            android:textColor="@color/black"
-            android:text="endereco "/>
+                <TextView
+                    android:id="@+id/tipo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="0"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="10dp"
+                    android:text="tipo "/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="2"
-            android:layout_gravity="right"
-            android:textColor="@color/black"
-            android:text="Número: "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="1"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black"
+                    android:text="Endereço: "/>
 
-        <TextView
-            android:id="@+id/numero"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="2"
-            android:textColor="@color/black"
-            android:text="numero "/>
+                <TextView
+                    android:id="@+id/endereco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="1"
+                    android:textColor="@color/black"
+                    android:text="endereco "/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_row="2"
-            android:layout_marginLeft="50dp"
-            android:layout_gravity="right"
-            android:textColor="@color/black"
-            android:text="CEP: "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="2"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black"
+                    android:text="Número: "/>
 
-        <TextView
-            android:id="@+id/cep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="4"
-            android:layout_row="2"
-            android:textColor="@color/black"
-            android:text="cep "/>
+                <TextView
+                    android:id="@+id/numero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="2"
+                    android:textColor="@color/black"
+                    android:text="numero "/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="3"
-            android:layout_gravity="right"
-            android:textColor="@color/black"
-            android:text="Bairro: "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:layout_row="2"
+                    android:layout_marginLeft="50dp"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black"
+                    android:text="CEP: "/>
 
-        <TextView
-            android:id="@+id/bairro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="3"
-            android:textColor="@color/black"
-            android:text="bairro "/>
+                <TextView
+                    android:id="@+id/cep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="4"
+                    android:layout_row="2"
+                    android:textColor="@color/black"
+                    android:text="cep "/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="4"
-            android:layout_gravity="right"
-            android:textColor="@color/black"
-            android:text="Cidade: "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="3"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black"
+                    android:text="Bairro: "/>
 
-        <TextView
-            android:id="@+id/cidade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="4"
-            android:textColor="@color/black"
-            android:text="cidade "/>
+                <TextView
+                    android:id="@+id/bairro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="3"
+                    android:textColor="@color/black"
+                    android:text="bairro "/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_row="4"
-            android:layout_marginLeft="50dp"
-            android:layout_gravity="right"
-            android:textColor="@color/black"
-            android:text="Estado: "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="4"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black"
+                    android:text="Cidade: "/>
 
-        <TextView
-            android:id="@+id/uf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="4"
-            android:layout_row="4"
-            android:textColor="@color/black"
-            android:text="uf "/>
+                <TextView
+                    android:id="@+id/cidade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="4"
+                    android:textColor="@color/black"
+                    android:text="cidade "/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="5"
-            android:layout_gravity="right"
-            android:textColor="@color/black"
-            android:text=" "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:layout_row="4"
+                    android:layout_marginLeft="50dp"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black"
+                    android:text="Estado: "/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="5"
-            android:textColor="@color/black"
-            android:text=""/>
+                <TextView
+                    android:id="@+id/uf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="4"
+                    android:layout_row="4"
+                    android:textColor="@color/black"
+                    android:text="uf "/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="6"
-            android:layout_gravity="right"
-            android:textColor="@color/black"
-            android:text="Valor: R$"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="5"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black"
+                    android:text=" "/>
 
-        <TextView
-            android:id="@+id/valor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="6"
-            android:layout_column="1"
-            android:text="valor"
-            android:textColor="@color/black" />
-    </GridLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="5"
+                    android:textColor="@color/black"
+                    android:text=""/>
 
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="6"
+                    android:layout_gravity="right"
+                    android:textColor="@color/black"
+                    android:text="Valor: R$"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_column="0"
-            android:layout_row="0"
-            android:text="CONTATO"/>
+                <TextView
+                    android:id="@+id/valor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="6"
+                    android:layout_column="1"
+                    android:text="valor"
+                    android:textColor="@color/black" />
+            </GridLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_gravity="right"
-            android:layout_column="0"
-            android:layout_row="1"
-            android:text="Telefone: "/>
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp">
 
-        <TextView
-            android:id="@+id/telefone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:text="telefone"
-            android:textColor="@color/black" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_column="0"
+                    android:layout_row="0"
+                    android:text="CONTATO"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_gravity="right"
-            android:layout_column="0"
-            android:layout_row="2"
-            android:text="Celular: "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_gravity="right"
+                    android:layout_column="0"
+                    android:layout_row="1"
+                    android:text="Telefone: "/>
 
-        <TextView
-            android:id="@+id/celular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="2"
-            android:layout_column="1"
-            android:text="celular"
-            android:textColor="@color/black" />
+                <TextView
+                    android:id="@+id/telefone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:text="telefone"
+                    android:textColor="@color/black" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_gravity="right"
-            android:layout_column="0"
-            android:layout_row="3"
-            android:text="E-mail: "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_gravity="right"
+                    android:layout_column="0"
+                    android:layout_row="2"
+                    android:text="Celular: "/>
 
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="3"
-            android:layout_column="1"
-            android:text="email"
-            android:textColor="@color/black" />
-    </GridLayout>
+                <TextView
+                    android:id="@+id/celular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="2"
+                    android:layout_column="1"
+                    android:text="celular"
+                    android:textColor="@color/black" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_gravity="right"
+                    android:layout_column="0"
+                    android:layout_row="3"
+                    android:text="E-mail: "/>
 
-
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="3"
+                    android:layout_column="1"
+                    android:text="email"
+                    android:textColor="@color/black" />
+            </GridLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
