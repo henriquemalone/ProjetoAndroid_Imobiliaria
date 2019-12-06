@@ -127,13 +127,13 @@ public class Perfil_frag extends Fragment {
             @Override
             public void onClick(View view) {
                 //Solicita permissao para acessar Galeria de imagens
-                /*if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
                     if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)){
                         Toast.makeText(getActivity(), "Permissão de acesso negada pelo usuário",Toast.LENGTH_LONG).show();
                     } else {
                         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSAO_REQUEST);
                     }
-                }*/
+                }
 
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, GALERIA_IMAGENS);

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "558099783093-ug6e7p5lv7jt7bgpd55a1kmlio02j34i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.si700_imobiliaria",
+            "certificate_hash": "7324174fabe8765b28be71bb42c414f51281ff7d"
+          }
+        },
+        {
           "client_id": "558099783093-d1ke7f148gfmk1iea10veaiedp0ag106.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
